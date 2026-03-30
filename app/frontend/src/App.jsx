@@ -13,6 +13,7 @@ import {
 import { mockKpis, mockPoints } from './mockData';
 
 const formatDate = (dateValue) => new Date(dateValue).toISOString().slice(0, 10);
+const formatCurrency = (value) => `${value.toFixed(2)} EUR`;
 
 const getRegionsFromKpis = (rows) => [...new Set(rows.map((row) => row.region))].sort();
 
@@ -30,10 +31,16 @@ const filterBySelection = (rows, region, city, dateRange) =>
     return true;
   });
 
-const scoreColor = (score) => {
-  if (score >= 0.75) return '#229164';
-  if (score >= 0.65) return '#e0a108';
-  return '#d94b3d';
+const getPriceBand = (price) => {
+  if (price < 3.5) return 'Economique';
+  if (price < 5.5) return 'Intermediaire';
+  return 'Premium';
+};
+
+const priceBandClassName = (price) => {
+  if (price < 3.5) return 'tariff-chip tariff-chip--low';
+  if (price < 5.5) return 'tariff-chip tariff-chip--mid';
+  return 'tariff-chip tariff-chip--high';
 };
 
 export default function App() {
@@ -119,7 +126,6 @@ export default function App() {
   const summary = useMemo(() => {
     if (!kpis.length) {
       return {
-        avgScore: 0,
         avgPrice: 0,
         avgOccupancy: 0,
         topCity: '-'
@@ -128,28 +134,18 @@ export default function App() {
 
     const totals = kpis.reduce(
       (accumulator, row) => {
-        accumulator.score += row.score;
         accumulator.price += row.avg_price;
         accumulator.occupancy += row.avg_occupancy;
-
-        if (!accumulator.cityScores[row.city]) {
-          accumulator.cityScores[row.city] = { total: 0, count: 0 };
-        }
-
-        accumulator.cityScores[row.city].total += row.score;
-        accumulator.cityScores[row.city].count += 1;
+        accumulator.cityObservations[row.city] = (accumulator.cityObservations[row.city] || 0) + row.observations;
 
         return accumulator;
       },
-      { score: 0, price: 0, occupancy: 0, cityScores: {} }
+      { price: 0, occupancy: 0, cityObservations: {} }
     );
 
-    const topCity = Object.entries(totals.cityScores)
-      .map(([city, values]) => ({ city, score: values.total / values.count }))
-      .sort((left, right) => right.score - left.score)[0]?.city;
+    const topCity = Object.entries(totals.cityObservations).sort((left, right) => right[1] - left[1])[0]?.[0];
 
     return {
-      avgScore: totals.score / kpis.length,
       avgPrice: totals.price / kpis.length,
       avgOccupancy: totals.occupancy / kpis.length,
       topCity: topCity || '-'
@@ -160,6 +156,61 @@ export default function App() {
     region,
     avg_price: rows.reduce((sum, row) => sum + row.avg_price, 0) / rows.length
   }));
+
+  const tariffOverview = useMemo(() => {
+    if (!kpis.length) {
+      return {
+        average: 0,
+        min: 0,
+        max: 0,
+        spread: 0,
+        cheapestRegion: '-',
+        highestRegion: '-'
+      };
+    }
+
+    const prices = kpis.map((row) => row.avg_price);
+    const regionAverages = Object.entries(kpisByRegion).map(([region, rows]) => ({
+      region,
+      average: rows.reduce((sum, row) => sum + row.avg_price, 0) / rows.length
+    }));
+
+    const cheapestRegion = [...regionAverages].sort((left, right) => left.average - right.average)[0];
+    const highestRegion = [...regionAverages].sort((left, right) => right.average - left.average)[0];
+
+    return {
+      average: prices.reduce((sum, price) => sum + price, 0) / prices.length,
+      min: Math.min(...prices),
+      max: Math.max(...prices),
+      spread: Math.max(...prices) - Math.min(...prices),
+      cheapestRegion: cheapestRegion?.region || '-',
+      highestRegion: highestRegion?.region || '-'
+    };
+  }, [kpis, kpisByRegion]);
+
+  const tariffDetails = useMemo(
+    () =>
+      Object.entries(kpisByRegion)
+        .map(([region, rows]) => {
+          const prices = rows.map((row) => row.avg_price);
+          const average = prices.reduce((sum, price) => sum + price, 0) / prices.length;
+          const occupancy = rows.reduce((sum, row) => sum + row.avg_occupancy, 0) / rows.length;
+          const topCity = [...rows].sort((left, right) => right.observations - left.observations)[0];
+
+          return {
+            region,
+            average,
+            min: Math.min(...prices),
+            max: Math.max(...prices),
+            occupancy,
+            topCity: topCity?.city || '-',
+            topObservations: topCity?.observations || 0,
+            priceBand: getPriceBand(average)
+          };
+        })
+        .sort((left, right) => left.average - right.average),
+    [kpisByRegion]
+  );
 
   const mapCenter = points.length
     ? [points[0].latitude, points[0].longitude]
@@ -201,9 +252,9 @@ export default function App() {
           </article>
 
           <article className="insight-card">
-            <span className="insight-card__label">Ville la plus performante</span>
+            <span className="insight-card__label">Ville la plus suivie</span>
             <strong>{summary.topCity}</strong>
-            <p>Meilleur score moyen sur la plage de dates active.</p>
+            <p>Ville la plus observee sur la plage de dates active.</p>
           </article>
         </section>
 
@@ -274,17 +325,70 @@ export default function App() {
               <article className="surface-card">
                 <div className="section-heading">
                   <p className="eyebrow">Tarifs</p>
-                  <h3>Prix moyen par region</h3>
+                  <h3>Prix par region, avec plus de contexte</h3>
+                </div>
+                <div className="tariff-overview">
+                  <div className="tariff-stat">
+                    <span>Moyenne observee</span>
+                    <strong>{formatCurrency(tariffOverview.average)}</strong>
+                  </div>
+                  <div className="tariff-stat">
+                    <span>Fourchette</span>
+                    <strong>
+                      {formatCurrency(tariffOverview.min)} - {formatCurrency(tariffOverview.max)}
+                    </strong>
+                  </div>
+                  <div className="tariff-stat">
+                    <span>Ecart de prix</span>
+                    <strong>{formatCurrency(tariffOverview.spread)}</strong>
+                  </div>
+                  <div className="tariff-stat">
+                    <span>Zone la plus accessible</span>
+                    <strong>{tariffOverview.cheapestRegion}</strong>
+                  </div>
                 </div>
                 <ResponsiveContainer width="100%" height={260}>
                   <BarChart data={chartPriceData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="4 4" stroke="#d7d2c7" />
                     <XAxis dataKey="region" stroke="#5a5a5a" />
                     <YAxis stroke="#5a5a5a" />
-                    <Tooltip />
+                    <Tooltip formatter={(value) => formatCurrency(Number(value))} />
                     <Bar dataKey="avg_price" fill="#111111" radius={[10, 10, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
+                <div className="tariff-details">
+                  {tariffDetails.map((detail) => (
+                    <article key={detail.region} className="tariff-detail-card">
+                      <div className="tariff-detail-card__header">
+                        <div>
+                          <h4>{detail.region}</h4>
+                          <p>Ville leader: {detail.topCity}</p>
+                        </div>
+                        <span className={priceBandClassName(detail.average)}>{detail.priceBand}</span>
+                      </div>
+                      <div className="tariff-detail-card__grid">
+                        <div>
+                          <span>Tarif moyen</span>
+                          <strong>{formatCurrency(detail.average)}</strong>
+                        </div>
+                        <div>
+                          <span>Min / Max</span>
+                          <strong>
+                            {formatCurrency(detail.min)} / {formatCurrency(detail.max)}
+                          </strong>
+                        </div>
+                        <div>
+                          <span>Occupation moyenne</span>
+                          <strong>{(detail.occupancy * 100).toFixed(1)}%</strong>
+                        </div>
+                        <div>
+                          <span>Observations cle</span>
+                          <strong>{detail.topObservations}</strong>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </article>
             </div>
 
@@ -300,7 +404,7 @@ export default function App() {
                     key={`${point.city}-${index}-${point.date}`}
                     center={[point.latitude, point.longitude]}
                     radius={5 + Math.min(10, point.demand_count / 50)}
-                    color={scoreColor(point.score ?? 0)}
+                    color="#111111"
                     fillOpacity={0.8}
                   >
                     <Popup>
@@ -310,7 +414,6 @@ export default function App() {
                         {point.region} {formatDate(point.date)}
                       </div>
                       <div>Prix: {point.price_eur} EUR</div>
-                      <div>Score: {(point.score ?? 0).toFixed(2)}</div>
                       <div>
                         Demande {point.demand_count}; Offre {point.supply_count}
                       </div>
@@ -332,10 +435,9 @@ export default function App() {
                       <th>Date</th>
                       <th>Region</th>
                       <th>Ville</th>
-                      <th>Score</th>
                       <th>Prix moyen</th>
                       <th>Taux occupation</th>
-                      <th>Rank</th>
+                      <th>Observations</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -344,10 +446,9 @@ export default function App() {
                         <td>{row.date}</td>
                         <td>{row.region}</td>
                         <td>{row.city}</td>
-                        <td>{row.score.toFixed(3)}</td>
                         <td>{row.avg_price.toFixed(2)}</td>
                         <td>{(row.avg_occupancy * 100).toFixed(1)}%</td>
-                        <td>{row.rank_in_region}</td>
+                        <td>{row.observations}</td>
                       </tr>
                     ))}
                   </tbody>

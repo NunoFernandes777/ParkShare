@@ -250,8 +250,113 @@ main {
   gap: 22px;
 }
 
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--warning);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .surface-card {
   padding: 22px;
+}
+
+.tariff-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.tariff-stat,
+.tariff-detail-card {
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.tariff-stat {
+  padding: 16px 18px;
+}
+
+.tariff-stat span,
+.tariff-detail-card__grid span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.tariff-stat strong,
+.tariff-detail-card__grid strong {
+  display: block;
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+}
+
+.tariff-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.tariff-detail-card {
+  padding: 18px;
+}
+
+.tariff-detail-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.tariff-detail-card__header h4 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+}
+
+.tariff-detail-card__header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.tariff-detail-card__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 12px;
+}
+
+.tariff-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.tariff-chip--low {
+  background: rgba(31, 140, 93, 0.14);
+  color: var(--success);
+}
+
+.tariff-chip--mid {
+  background: rgba(242, 195, 0, 0.18);
+  color: var(--warning);
+}
+
+.tariff-chip--high {
+  background: rgba(217, 75, 61, 0.12);
+  color: #b13a30;
 }
 
 .map-card {
@@ -317,6 +422,11 @@ tbody tr:nth-child(even) {
     grid-template-columns: 1fr;
   }
 
+  .tariff-overview,
+  .tariff-details {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .control-panel {
     position: static;
   }
@@ -345,5 +455,15 @@ tbody tr:nth-child(even) {
   .control-panel,
   .surface-card {
     padding: 20px;
+  }
+
+  .tariff-overview,
+  .tariff-details,
+  .tariff-detail-card__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tariff-detail-card__header {
+    flex-direction: column;
   }
 }
