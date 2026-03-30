@@ -1,0 +1,21 @@
+{
+  "name": "parkshare-dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "init-db": "node init-db.js",
+    "start:api": "node backend/server.js",
+    "start:frontend": "cd frontend && npm run dev",
+    "start": "npm run init-db && npm run start:api"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "sqlite": "^4.1.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "vite": "^5.0.0"
+  }
+}
