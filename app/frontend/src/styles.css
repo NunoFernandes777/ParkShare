@@ -30,8 +30,11 @@ body {
   margin: 0;
   font-family: 'Manrope', 'Segoe UI', sans-serif;
   background:
+    radial-gradient(circle, rgba(17, 17, 17, 0.1) 1.1px, transparent 1.1px),
     radial-gradient(circle at top, rgba(242, 195, 0, 0.12), transparent 24%),
     linear-gradient(180deg, #f7f4ed 0%, #f3efe7 100%);
+  background-size: 24px 24px, auto, auto;
+  background-position: 0 0, center top, center;
   color: var(--ink);
 }
 
@@ -359,6 +362,61 @@ main {
   color: #b13a30;
 }
 
+.chatbot-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.chatbot-hint {
+  max-width: 260px;
+  padding: 10px 12px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 253, 248, 0.96);
+  box-shadow: var(--shadow-soft);
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.chatbot-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #111111 0%, #252525 100%);
+  box-shadow: var(--shadow-strong);
+  color: #fff5cf;
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.chatbot-trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.bpFab {
+  display: none !important;
+}
+
+.bpWebchat {
+  right: 20px !important;
+  bottom: 86px !important;
+}
+
 .map-card {
   overflow: hidden;
   position: relative;
@@ -465,5 +523,22 @@ tbody tr:nth-child(even) {
 
   .tariff-detail-card__header {
     flex-direction: column;
+  }
+
+  .chatbot-widget {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    align-items: stretch;
+  }
+
+  .chatbot-card {
+    width: 100%;
+  }
+
+  .chatbot-trigger {
+    align-self: flex-end;
+    width: 52px;
+    height: 52px;
   }
 }

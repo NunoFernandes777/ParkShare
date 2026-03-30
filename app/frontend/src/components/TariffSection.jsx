@@ -14,7 +14,7 @@ export function TariffSection({ chartPriceData, tariffOverview, tariffDetails })
     <article className="surface-card">
       <div className="section-heading">
         <p className="eyebrow">Tarifs</p>
-        <h3>Prix par region, avec plus de contexte</h3>
+        <h3>Prix par region</h3>
       </div>
 
       <div className="tariff-overview">

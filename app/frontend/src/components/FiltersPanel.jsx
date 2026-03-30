@@ -3,10 +3,8 @@ export function FiltersPanel({
   cities,
   selectedRegion,
   selectedCity,
-  dateRange,
   onRegionChange,
-  onCityChange,
-  onDateRangeChange
+  onCityChange
 }) {
   return (
     <aside className="control-panel" id="filters">
@@ -34,22 +32,6 @@ export function FiltersPanel({
           </option>
         ))}
       </select>
-
-      <label htmlFor="start-date">Date debut</label>
-      <input
-        id="start-date"
-        type="date"
-        value={dateRange[0]}
-        onChange={(event) => onDateRangeChange([event.target.value, dateRange[1]])}
-      />
-
-      <label htmlFor="end-date">Date fin</label>
-      <input
-        id="end-date"
-        type="date"
-        value={dateRange[1]}
-        onChange={(event) => onDateRangeChange([dateRange[0], event.target.value])}
-      />
 
       <div className="control-panel__summary">
         <div>

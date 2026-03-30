@@ -1,4 +1,3 @@
-export const DEFAULT_DATE_RANGE = ['2025-01-01', '2025-12-31'];
 export const DEFAULT_MAP_CENTER = [46.5, 2.5];
 
 export const formatDate = (dateValue) => new Date(dateValue).toISOString().slice(0, 10);
@@ -11,12 +10,10 @@ export const getCitiesForRegion = (rows, region) => {
   return [...new Set(filteredRows.map((row) => row.city))].sort();
 };
 
-export const filterBySelection = (rows, region, city, dateRange) =>
+export const filterBySelection = (rows, region, city) =>
   rows.filter((row) => {
     if (region && row.region !== region) return false;
     if (city && row.city !== city) return false;
-    if (dateRange[0] && row.date < dateRange[0]) return false;
-    if (dateRange[1] && row.date > dateRange[1]) return false;
     return true;
   });
 

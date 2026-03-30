@@ -4,8 +4,8 @@ export function KpiTableSection({ kpis }) {
   return (
     <article className="surface-card table-card">
       <div className="section-heading">
-        <p className="eyebrow">Classement</p>
-        <h3>KPI par ville</h3>
+        <p className="eyebrow">Indicateurs</p>
+        <h3>Synthese par ville</h3>
       </div>
 
       <div className="table-wrapper">

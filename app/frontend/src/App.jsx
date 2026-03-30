@@ -5,9 +5,9 @@ import { InsightsSection } from './components/InsightsSection';
 import { KpiTableSection } from './components/KpiTableSection';
 import { MapSection } from './components/MapSection';
 import { TariffSection } from './components/TariffSection';
+import { ChatbotPanel } from './components/ChatbotPanel';
 import { mockKpis, mockPoints } from './mockData';
 import {
-  DEFAULT_DATE_RANGE,
   buildChartPriceData,
   buildSummary,
   buildTariffDetails,
@@ -23,7 +23,6 @@ export default function App() {
   const [cities, setCities] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [dateRange, setDateRange] = useState(DEFAULT_DATE_RANGE);
   const [kpis, setKpis] = useState([]);
   const [points, setPoints] = useState([]);
   const [isOfflineMode, setIsOfflineMode] = useState(false);
@@ -37,8 +36,6 @@ export default function App() {
       const params = new URLSearchParams();
       if (selectedRegion) params.append('region', selectedRegion);
       if (selectedCity) params.append('city', selectedCity);
-      if (dateRange[0]) params.append('start_date', dateRange[0]);
-      if (dateRange[1]) params.append('end_date', dateRange[1]);
 
       try {
         const requests = [
@@ -71,8 +68,8 @@ export default function App() {
       } catch {
         if (!isMounted) return;
 
-        const filteredKpis = filterBySelection(mockKpis, selectedRegion, selectedCity, dateRange);
-        const filteredPoints = filterBySelection(mockPoints, selectedRegion, selectedCity, dateRange);
+        const filteredKpis = filterBySelection(mockKpis, selectedRegion, selectedCity);
+        const filteredPoints = filterBySelection(mockPoints, selectedRegion, selectedCity);
 
         setRegions(getRegionsFromKpis(mockKpis));
         setCities(getCitiesForRegion(mockKpis, selectedRegion));
@@ -87,7 +84,7 @@ export default function App() {
     return () => {
       isMounted = false;
     };
-  }, [selectedRegion, selectedCity, dateRange]);
+  }, [selectedRegion, selectedCity]);
 
   const kpisByRegion = useMemo(() => groupKpisByRegion(kpis), [kpis]);
   const summary = useMemo(() => buildSummary(kpis), [kpis]);
@@ -124,10 +121,8 @@ export default function App() {
             cities={cities}
             selectedRegion={selectedRegion}
             selectedCity={selectedCity}
-            dateRange={dateRange}
             onRegionChange={handleRegionChange}
             onCityChange={setSelectedCity}
-            onDateRangeChange={setDateRange}
           />
 
           <section className="content-stack">
@@ -145,6 +140,14 @@ export default function App() {
           </section>
         </section>
       </main>
+
+      <ChatbotPanel
+        selectedRegion={selectedRegion}
+        selectedCity={selectedCity}
+        summary={summary}
+        tariffOverview={tariffOverview}
+        kpis={kpis}
+      />
     </div>
   );
 }
