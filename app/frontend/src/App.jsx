@@ -178,15 +178,6 @@ export default function App() {
           <a href="#insights">Tarifs</a>
           <a href="#filters">Contact</a>
         </nav>
-
-        <div className="topbar__actions">
-          <a className="topbar__ghost" href="#filters">
-            Je gere des residences
-          </a>
-          <a className="topbar__cta" href="#insights">
-            Telecharger
-          </a>
-        </div>
       </header>
 
       <main>
