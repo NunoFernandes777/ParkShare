@@ -82,6 +82,28 @@ function Kpi4ScatterTooltip({ active, payload, label }) {
   );
 }
 
+function MotorizationScatterTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  const point = payload[0]?.payload;
+
+  if (!point) {
+    return null;
+  }
+
+  return (
+    <div className="analytics-tooltip">
+      <strong>{label || point.city}</strong>
+      <span>Taux de motorisation : {formatPercent(point.taux_motorisation_pct)}</span>
+      <span>Lots stationnement : {formatInteger(point.lots_stationnement_copro)}</span>
+      <span>Score potentiel : {formatScore(point.score_potentiel)}</span>
+      <span>Appartements : {formatInteger(point.nb_appartements)}</span>
+    </div>
+  );
+}
+
 function getMotorizationScatterColor(score) {
   if (score >= 60) return '#f2c300';
   if (score >= 35) return '#d49a00';
@@ -271,13 +293,7 @@ export function AnalyticsSection({
             <ZAxis type="number" dataKey="bubble_size" range={[30, 800]} />
             <Tooltip
               cursor={{ strokeDasharray: '3 3' }}
-              formatter={(value, name) => {
-                if (name === 'Taux de motorisation') return [formatPercent(value), name];
-                if (name === 'Lots stationnement') return [formatInteger(value), name];
-                if (name === 'Score potentiel') return [formatScore(value), name];
-                if (name === 'Nb appartements') return [formatInteger(value), name];
-                return [value, name];
-              }}
+              content={<MotorizationScatterTooltip />}
               labelFormatter={(_, payload) => payload?.[0]?.payload?.city || ''}
               contentStyle={{ borderRadius: '16px', border: '1px solid rgba(17, 17, 17, 0.08)' }}
             />

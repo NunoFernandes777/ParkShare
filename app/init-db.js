@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 const DB_FILE = path.resolve(__dirname, "app.db");
 const DATA_DIRECTORY = path.resolve(__dirname, "..", "data", "converted");
 const COORDINATES_CACHE_FILE = path.join(DATA_DIRECTORY, "commune_coordinates_cache.json");
+const EXCLUDED_COMMUNE_CODES = new Set(["91182", "93059"]);
 
 function parseCsvLine(line) {
   const values = [];
@@ -200,7 +201,7 @@ async function loadCommunesDataset() {
         parking_gap: parkingGap
       };
     })
-    .filter((row) => row.code_commune && row.city);
+    .filter((row) => row.code_commune && row.city && !EXCLUDED_COMMUNE_CODES.has(row.code_commune));
 
   const eligibleRows = normalizedRows.filter((row) => row.nb_logements > 50 && row.nb_copros > 0 && row.nb_lots_stat_total > 0);
 
