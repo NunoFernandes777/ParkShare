@@ -46,10 +46,10 @@ export function TariffSection({
         </div>
       </div>
 
-      <ResponsiveContainer width="100%" height={260}>
+      <ResponsiveContainer width="100%" height={320}>
         <BarChart data={chartScoreData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <CartesianGrid strokeDasharray="4 4" stroke="#d7d2c7" />
-          <XAxis dataKey="department" stroke="#5a5a5a" />
+          <XAxis dataKey="department" stroke="#5a5a5a" interval={0} angle={-18} textAnchor="end" height={74} />
           <YAxis stroke="#5a5a5a" />
           <Tooltip formatter={(value) => formatScore(value)} />
           <Bar dataKey="score_potentiel" fill="#111111" radius={[10, 10, 0, 0]} />

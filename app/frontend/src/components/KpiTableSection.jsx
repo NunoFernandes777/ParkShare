@@ -1,4 +1,4 @@
-import { formatInteger, formatPercent, formatScore } from '../utils/dashboard';
+import { formatDepartment, formatInteger, formatPercent, formatScore } from '../utils/dashboard';
 
 export function KpiTableSection({ kpis }) {
   return (
@@ -23,7 +23,7 @@ export function KpiTableSection({ kpis }) {
           <tbody>
             {kpis.slice(0, 80).map((row) => (
               <tr key={row.code_commune}>
-                <td>{row.department}</td>
+                <td>{formatDepartment(row.department)}</td>
                 <td>{row.city}</td>
                 <td>{formatScore(row.score_potentiel)}</td>
                 <td>{formatInteger(row.nb_lots_stat_total)}</td>

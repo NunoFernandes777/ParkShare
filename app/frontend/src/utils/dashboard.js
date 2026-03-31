@@ -2,7 +2,7 @@ export const DEFAULT_MAP_CENTER = [46.5, 2.5];
 
 const LOW_SCORE_THRESHOLD = 35;
 const MID_SCORE_THRESHOLD = 60;
-const MAX_DEPARTMENTS_IN_CHART = 10;
+const MAX_DEPARTMENTS_IN_CHART = 15;
 const MAX_SCATTER_POINTS = 40;
 const MAX_KPI1_CITY_BARS = 20;
 const MAX_KPI1_DEPARTMENT_BARS = 20;
@@ -24,6 +24,110 @@ const KPI4_PROFILE_COLORS = {
   'Forte tension': '#b13a30'
 };
 
+const DEPARTMENT_NAMES = {
+  '01': 'Ain',
+  '02': 'Aisne',
+  '03': 'Allier',
+  '04': 'Alpes-de-Haute-Provence',
+  '05': 'Hautes-Alpes',
+  '06': 'Alpes-Maritimes',
+  '07': 'Ardeche',
+  '08': 'Ardennes',
+  '09': 'Ariege',
+  '10': 'Aube',
+  '11': 'Aude',
+  '12': 'Aveyron',
+  '13': 'Bouches-du-Rhone',
+  '14': 'Calvados',
+  '15': 'Cantal',
+  '16': 'Charente',
+  '17': 'Charente-Maritime',
+  '18': 'Cher',
+  '19': 'Correze',
+  '21': "Cote-d'Or",
+  '22': "Cotes-d'Armor",
+  '23': 'Creuse',
+  '24': 'Dordogne',
+  '25': 'Doubs',
+  '26': 'Drome',
+  '27': 'Eure',
+  '28': 'Eure-et-Loir',
+  '29': 'Finistere',
+  '2A': 'Corse-du-Sud',
+  '2B': 'Haute-Corse',
+  '30': 'Gard',
+  '31': 'Haute-Garonne',
+  '32': 'Gers',
+  '33': 'Gironde',
+  '34': 'Herault',
+  '35': 'Ille-et-Vilaine',
+  '36': 'Indre',
+  '37': 'Indre-et-Loire',
+  '38': 'Isere',
+  '39': 'Jura',
+  '40': 'Landes',
+  '41': 'Loir-et-Cher',
+  '42': 'Loire',
+  '43': 'Haute-Loire',
+  '44': 'Loire-Atlantique',
+  '45': 'Loiret',
+  '46': 'Lot',
+  '47': 'Lot-et-Garonne',
+  '48': 'Lozere',
+  '49': 'Maine-et-Loire',
+  '50': 'Manche',
+  '51': 'Marne',
+  '52': 'Haute-Marne',
+  '53': 'Mayenne',
+  '54': 'Meurthe-et-Moselle',
+  '55': 'Meuse',
+  '56': 'Morbihan',
+  '57': 'Moselle',
+  '58': 'Nievre',
+  '59': 'Nord',
+  '60': 'Oise',
+  '61': 'Orne',
+  '62': 'Pas-de-Calais',
+  '63': 'Puy-de-Dome',
+  '64': 'Pyrenees-Atlantiques',
+  '65': 'Hautes-Pyrenees',
+  '66': 'Pyrenees-Orientales',
+  '67': 'Bas-Rhin',
+  '68': 'Haut-Rhin',
+  '69': 'Rhone',
+  '70': 'Haute-Saone',
+  '71': 'Saone-et-Loire',
+  '72': 'Sarthe',
+  '73': 'Savoie',
+  '74': 'Haute-Savoie',
+  '75': 'Paris',
+  '76': 'Seine-Maritime',
+  '77': 'Seine-et-Marne',
+  '78': 'Yvelines',
+  '79': 'Deux-Sevres',
+  '80': 'Somme',
+  '81': 'Tarn',
+  '82': 'Tarn-et-Garonne',
+  '83': 'Var',
+  '84': 'Vaucluse',
+  '85': 'Vendee',
+  '86': 'Vienne',
+  '87': 'Haute-Vienne',
+  '88': 'Vosges',
+  '89': 'Yonne',
+  '90': 'Territoire de Belfort',
+  '91': 'Essonne',
+  '92': 'Hauts-de-Seine',
+  '93': 'Seine-Saint-Denis',
+  '94': 'Val-de-Marne',
+  '95': "Val-d'Oise",
+  '971': 'Guadeloupe',
+  '972': 'Martinique',
+  '973': 'Guyane',
+  '974': 'La Reunion',
+  '976': 'Mayotte'
+};
+
 const average = (values) => {
   if (!values.length) return 0;
   return values.reduce((sum, value) => sum + value, 0) / values.length;
@@ -32,7 +136,15 @@ const average = (values) => {
 export const formatInteger = (value) => new Intl.NumberFormat('fr-FR').format(Number(value) || 0);
 export const formatPercent = (value) => `${Number(value || 0).toFixed(1)}%`;
 export const formatScore = (value) => Number(value || 0).toFixed(1);
-export const formatDepartment = (value) => (value ? `Dept ${value}` : '-');
+export const formatDepartment = (value) => {
+  const code = String(value || '').trim();
+
+  if (!code) {
+    return '-';
+  }
+
+  return DEPARTMENT_NAMES[code] ? `${DEPARTMENT_NAMES[code]} (${code})` : `Dept ${code}`;
+};
 export const formatDate = (dateValue) => new Date(dateValue).toISOString().slice(0, 10);
 export const formatCurrency = (value) => `${Number(value).toFixed(2)} EUR`;
 

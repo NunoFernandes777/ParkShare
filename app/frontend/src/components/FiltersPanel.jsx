@@ -1,16 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
+import { formatDepartment } from '../utils/dashboard';
 
-function findMatchingOption(options, value) {
+function getOptionLabel(option, type) {
+  return type === 'department' ? formatDepartment(option) : option;
+}
+
+function findMatchingOption(options, value, type = 'default') {
   const normalizedValue = value.trim().toLocaleLowerCase();
 
   if (!normalizedValue) {
     return '';
   }
 
-  return options.find((option) => option.toLocaleLowerCase() === normalizedValue) || '';
+  return (
+    options.find((option) => {
+      const optionLabel = getOptionLabel(option, type).toLocaleLowerCase();
+      return option.toLocaleLowerCase() === normalizedValue || optionLabel === normalizedValue;
+    }) || ''
+  );
 }
 
-function filterOptions(options, value) {
+function filterOptions(options, value, type = 'default') {
   const normalizedValue = value.trim().toLocaleLowerCase();
 
   if (!normalizedValue) {
@@ -18,7 +28,10 @@ function filterOptions(options, value) {
   }
 
   return options
-    .filter((option) => option.toLocaleLowerCase().includes(normalizedValue))
+    .filter((option) => {
+      const optionLabel = getOptionLabel(option, type).toLocaleLowerCase();
+      return option.toLocaleLowerCase().includes(normalizedValue) || optionLabel.includes(normalizedValue);
+    })
     .slice(0, 8);
 }
 
@@ -30,20 +43,20 @@ export function FiltersPanel({
   onRegionChange,
   onCityChange
 }) {
-  const [regionQuery, setRegionQuery] = useState(selectedRegion);
+  const [regionQuery, setRegionQuery] = useState(selectedRegion ? formatDepartment(selectedRegion) : '');
   const [cityQuery, setCityQuery] = useState(selectedCity);
   const [isRegionMenuOpen, setIsRegionMenuOpen] = useState(false);
   const [isCityMenuOpen, setIsCityMenuOpen] = useState(false);
 
   useEffect(() => {
-    setRegionQuery(selectedRegion);
+    setRegionQuery(selectedRegion ? formatDepartment(selectedRegion) : '');
   }, [selectedRegion]);
 
   useEffect(() => {
     setCityQuery(selectedCity);
   }, [selectedCity]);
 
-  const filteredRegions = useMemo(() => filterOptions(regions, regionQuery), [regions, regionQuery]);
+  const filteredRegions = useMemo(() => filterOptions(regions, regionQuery, 'department'), [regions, regionQuery]);
   const filteredCities = useMemo(() => filterOptions(cities, cityQuery), [cities, cityQuery]);
 
   const handleRegionInputChange = (value) => {
@@ -55,7 +68,7 @@ export function FiltersPanel({
       return;
     }
 
-    const matchedRegion = findMatchingOption(regions, value);
+    const matchedRegion = findMatchingOption(regions, value, 'department');
 
     if (matchedRegion) {
       onRegionChange(matchedRegion);
@@ -79,8 +92,8 @@ export function FiltersPanel({
   };
 
   const handleRegionBlur = () => {
-    const matchedRegion = findMatchingOption(regions, regionQuery);
-    setRegionQuery(matchedRegion || selectedRegion);
+    const matchedRegion = findMatchingOption(regions, regionQuery, 'department');
+    setRegionQuery(matchedRegion ? formatDepartment(matchedRegion) : selectedRegion ? formatDepartment(selectedRegion) : '');
     setTimeout(() => setIsRegionMenuOpen(false), 120);
   };
 
@@ -91,7 +104,7 @@ export function FiltersPanel({
   };
 
   const handleRegionSelect = (region) => {
-    setRegionQuery(region);
+    setRegionQuery(formatDepartment(region));
     setIsRegionMenuOpen(false);
     onRegionChange(region);
   };
@@ -130,7 +143,7 @@ export function FiltersPanel({
                 className="filter-combobox__option"
                 onMouseDown={() => handleRegionSelect(region)}
               >
-                {region}
+                {formatDepartment(region)}
               </button>
             ))}
           </div>
@@ -168,7 +181,7 @@ export function FiltersPanel({
       <div className="control-panel__summary">
         <div>
           <span>Departement actif</span>
-          <strong>{selectedRegion || 'Tous'}</strong>
+          <strong>{selectedRegion ? formatDepartment(selectedRegion) : 'Tous'}</strong>
         </div>
         <div>
           <span>Ville active</span>
