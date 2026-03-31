@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const BOTPRESS_SCRIPT_URL = 'https://cdn.botpress.cloud/webchat/v3.3/inject.js';
+const BOTPRESS_OPEN_DELAY_MS = 150;
+const BOTPRESS_BOOT_DELAY_MS = 500;
+const MISSING_CONFIG_MESSAGE = 'Ajoutez VITE_BOTPRESS_BOT_ID et VITE_BOTPRESS_CLIENT_ID dans app/frontend/.env.';
+const BOTPRESS_INIT_ERROR_MESSAGE = 'Botpress n a pas pu etre initialise.';
+const BOTPRESS_STORAGE_LOCATION = 'sessionStorage';
 
 function injectBotpressScript() {
   return new Promise((resolve, reject) => {
@@ -24,6 +29,12 @@ function injectBotpressScript() {
     script.onerror = () => reject(new Error('Impossible de charger Botpress.'));
     document.head.appendChild(script);
   });
+}
+
+function openBotpressWidget(delayMs) {
+  window.setTimeout(() => {
+    window.botpress?.open();
+  }, delayMs);
 }
 
 function buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview, kpis }) {
@@ -72,14 +83,15 @@ export function ChatbotPanel({
     () => buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview, kpis }),
     [selectedRegion, selectedCity, summary, tariffOverview, kpis]
   );
+  const isConfigured = Boolean(botId && clientId);
 
   useEffect(() => {
     let isMounted = true;
 
     async function setupBotpress() {
-      if (!botId || !clientId) {
+      if (!isConfigured) {
         if (isMounted) {
-          setError('Ajoutez VITE_BOTPRESS_BOT_ID et VITE_BOTPRESS_CLIENT_ID dans app/frontend/.env.');
+          setError(MISSING_CONFIG_MESSAGE);
         }
         return;
       }
@@ -97,7 +109,8 @@ export function ChatbotPanel({
           configuration: {
             variant: 'soft',
             themeMode: 'light',
-            fontFamily: 'Manrope'
+            fontFamily: 'Manrope',
+            storageLocation: BOTPRESS_STORAGE_LOCATION
           }
         });
 
@@ -106,14 +119,12 @@ export function ChatbotPanel({
           setIsReady(true);
 
           if (shouldOpenRef.current) {
-            setTimeout(() => {
-              window.botpress.open();
-            }, 500);
+            openBotpressWidget(BOTPRESS_BOOT_DELAY_MS);
           }
         });
       } catch (setupError) {
         if (isMounted) {
-          setError(setupError.message || 'Botpress n a pas pu etre initialise.');
+          setError(setupError.message || BOTPRESS_INIT_ERROR_MESSAGE);
         }
       }
     }
@@ -132,9 +143,7 @@ export function ChatbotPanel({
     if (!isReady) return;
 
     if (isOpen) {
-      setTimeout(() => {
-        window.botpress.open();
-      }, 150);
+      openBotpressWidget(BOTPRESS_OPEN_DELAY_MS);
     } else {
       window.botpress.close();
     }
@@ -160,7 +169,7 @@ export function ChatbotPanel({
         className="chatbot-trigger"
         onClick={() => setIsOpen((currentValue) => !currentValue)}
         aria-label={isOpen ? 'Fermer le chat' : 'Ouvrir le chat'}
-        disabled={!botId || !clientId}
+        disabled={!isConfigured}
       >
         Chat
       </button>

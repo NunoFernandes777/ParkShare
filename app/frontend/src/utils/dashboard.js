@@ -1,4 +1,11 @@
 export const DEFAULT_MAP_CENTER = [46.5, 2.5];
+const LOW_PRICE_THRESHOLD = 3.5;
+const MID_PRICE_THRESHOLD = 5.5;
+
+const average = (values) => {
+  if (!values.length) return 0;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+};
 
 export const formatDate = (dateValue) => new Date(dateValue).toISOString().slice(0, 10);
 export const formatCurrency = (value) => `${Number(value).toFixed(2)} EUR`;
@@ -18,14 +25,14 @@ export const filterBySelection = (rows, region, city) =>
   });
 
 export const getPriceBand = (price) => {
-  if (price < 3.5) return 'Economique';
-  if (price < 5.5) return 'Intermediaire';
+  if (price < LOW_PRICE_THRESHOLD) return 'Economique';
+  if (price < MID_PRICE_THRESHOLD) return 'Intermediaire';
   return 'Premium';
 };
 
 export const getPriceBandClassName = (price) => {
-  if (price < 3.5) return 'tariff-chip tariff-chip--low';
-  if (price < 5.5) return 'tariff-chip tariff-chip--mid';
+  if (price < LOW_PRICE_THRESHOLD) return 'tariff-chip tariff-chip--low';
+  if (price < MID_PRICE_THRESHOLD) return 'tariff-chip tariff-chip--mid';
   return 'tariff-chip tariff-chip--high';
 };
 
@@ -67,7 +74,7 @@ export const buildSummary = (kpis) => {
 export const buildChartPriceData = (kpisByRegion) =>
   Object.entries(kpisByRegion).map(([region, rows]) => ({
     region,
-    avg_price: rows.reduce((sum, row) => sum + row.avg_price, 0) / rows.length
+    avg_price: average(rows.map((row) => row.avg_price))
   }));
 
 export const buildTariffOverview = (kpis, kpisByRegion) => {
@@ -84,16 +91,18 @@ export const buildTariffOverview = (kpis, kpisByRegion) => {
   const prices = kpis.map((row) => row.avg_price);
   const regionAverages = Object.entries(kpisByRegion).map(([region, rows]) => ({
     region,
-    average: rows.reduce((sum, row) => sum + row.avg_price, 0) / rows.length
+    average: average(rows.map((row) => row.avg_price))
   }));
 
   const cheapestRegion = [...regionAverages].sort((left, right) => left.average - right.average)[0];
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
 
   return {
-    average: prices.reduce((sum, price) => sum + price, 0) / prices.length,
-    min: Math.min(...prices),
-    max: Math.max(...prices),
-    spread: Math.max(...prices) - Math.min(...prices),
+    average: average(prices),
+    min: minPrice,
+    max: maxPrice,
+    spread: maxPrice - minPrice,
     cheapestRegion: cheapestRegion?.region || '-'
   };
 };
@@ -102,19 +111,19 @@ export const buildTariffDetails = (kpisByRegion) =>
   Object.entries(kpisByRegion)
     .map(([region, rows]) => {
       const prices = rows.map((row) => row.avg_price);
-      const average = prices.reduce((sum, price) => sum + price, 0) / prices.length;
-      const occupancy = rows.reduce((sum, row) => sum + row.avg_occupancy, 0) / rows.length;
+      const averagePrice = average(prices);
+      const occupancy = average(rows.map((row) => row.avg_occupancy));
       const topCity = [...rows].sort((left, right) => right.observations - left.observations)[0];
 
       return {
         region,
-        average,
+        average: averagePrice,
         min: Math.min(...prices),
         max: Math.max(...prices),
         occupancy,
         topCity: topCity?.city || '-',
         topObservations: topCity?.observations || 0,
-        priceBand: getPriceBand(average)
+        priceBand: getPriceBand(averagePrice)
       };
     })
     .sort((left, right) => left.average - right.average);

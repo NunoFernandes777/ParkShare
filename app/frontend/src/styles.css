@@ -423,6 +423,13 @@ main {
   z-index: 1;
 }
 
+.map-card__hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 .map-card .leaflet-container {
   border-radius: 20px;
   z-index: 1;

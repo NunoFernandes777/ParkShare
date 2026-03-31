@@ -14,6 +14,36 @@ app.use(express.json());
 const getDb = () => open({ filename: DB_FILE, driver: sqlite3.Database });
 
 const buildContextBlock = (context = {}) => JSON.stringify(context, null, 2);
+const buildFilters = (query) => {
+  const { region, city, start_date, end_date } = query;
+  const where = [];
+  const params = [];
+
+  if (region) {
+    where.push("region = ?");
+    params.push(region);
+  }
+
+  if (city) {
+    where.push("city = ?");
+    params.push(city);
+  }
+
+  if (start_date) {
+    where.push("date >= ?");
+    params.push(start_date);
+  }
+
+  if (end_date) {
+    where.push("date <= ?");
+    params.push(end_date);
+  }
+
+  return {
+    params,
+    whereClause: where.length ? `WHERE ${where.join(" AND ")}` : ""
+  };
+};
 
 function extractResponseText(payload) {
   if (typeof payload.output_text === "string" && payload.output_text.trim()) {
@@ -55,18 +85,8 @@ app.get("/api/cities", async (req, res) => {
 });
 
 app.get("/api/kpis", async (req, res) => {
-  const { region, city, start_date, end_date } = req.query;
   const db = await getDb();
-
-  let where = [];
-  let params = [];
-
-  if (region) { where.push("region = ?"); params.push(region); }
-  if (city) { where.push("city = ?"); params.push(city); }
-  if (start_date) { where.push("date >= ?"); params.push(start_date); }
-  if (end_date) { where.push("date <= ?"); params.push(end_date); }
-
-  const whereClause = where.length ? `WHERE ${where.join(" AND ")}` : "";
+  const { params, whereClause } = buildFilters(req.query);
 
   const q = `SELECT * FROM kpi_data ${whereClause} ORDER BY date, region, city`;
   const rows = await db.all(q, ...params);
@@ -75,18 +95,8 @@ app.get("/api/kpis", async (req, res) => {
 });
 
 app.get("/api/points", async (req, res) => {
-  const { region, city, start_date, end_date } = req.query;
   const db = await getDb();
-
-  let where = [];
-  let params = [];
-
-  if (region) { where.push("region = ?"); params.push(region); }
-  if (city) { where.push("city = ?"); params.push(city); }
-  if (start_date) { where.push("date >= ?"); params.push(start_date); }
-  if (end_date) { where.push("date <= ?"); params.push(end_date); }
-
-  const whereClause = where.length ? `WHERE ${where.join(" AND ")}` : "";
+  const { params, whereClause } = buildFilters(req.query);
   const q = `SELECT region, city, latitude, longitude, price_eur, demand_count, supply_count, date FROM transformed_data ${whereClause}`;
   const rows = await db.all(q, ...params);
   await db.close();

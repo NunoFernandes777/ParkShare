@@ -18,6 +18,67 @@ import {
   groupKpisByRegion
 } from './utils/dashboard';
 
+const API_ENDPOINTS = {
+  regions: '/api/regions',
+  cities: '/api/cities',
+  kpis: '/api/kpis',
+  points: '/api/points'
+};
+
+function buildFilterParams(region, city) {
+  const params = new URLSearchParams();
+
+  if (region) params.append('region', region);
+  if (city) params.append('city', city);
+
+  return params;
+}
+
+function buildApiUrls(region, city) {
+  const params = buildFilterParams(region, city);
+  const queryString = params.toString();
+  const querySuffix = queryString ? `?${queryString}` : '';
+  const citySuffix = region ? `?region=${encodeURIComponent(region)}` : '';
+
+  return {
+    regions: API_ENDPOINTS.regions,
+    cities: `${API_ENDPOINTS.cities}${citySuffix}`,
+    kpis: `${API_ENDPOINTS.kpis}${querySuffix}`,
+    points: `${API_ENDPOINTS.points}${querySuffix}`
+  };
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Request failed for ${url}`);
+  }
+
+  return response.json();
+}
+
+async function loadApiData(region, city) {
+  const urls = buildApiUrls(region, city);
+  const [regions, cities, kpis, points] = await Promise.all([
+    fetchJson(urls.regions),
+    fetchJson(urls.cities),
+    fetchJson(urls.kpis),
+    fetchJson(urls.points)
+  ]);
+
+  return { regions, cities, kpis, points };
+}
+
+function loadOfflineData(region, city) {
+  return {
+    regions: getRegionsFromKpis(mockKpis),
+    cities: getCitiesForRegion(mockKpis, region),
+    kpis: filterBySelection(mockKpis, region, city),
+    points: filterBySelection(mockPoints, region, city)
+  };
+}
+
 export default function App() {
   const [regions, setRegions] = useState([]);
   const [cities, setCities] = useState([]);
@@ -31,50 +92,24 @@ export default function App() {
     let isMounted = true;
 
     async function loadData() {
-      // On centralise les filtres dans les query params pour garder
-      // le meme comportement entre l'API et le mode demo local.
-      const params = new URLSearchParams();
-      if (selectedRegion) params.append('region', selectedRegion);
-      if (selectedCity) params.append('city', selectedCity);
-
       try {
-        const requests = [
-          fetch('/api/regions'),
-          fetch(selectedRegion ? `/api/cities?region=${encodeURIComponent(selectedRegion)}` : '/api/cities'),
-          fetch(`/api/kpis?${params.toString()}`),
-          fetch(`/api/points?${params.toString()}`)
-        ];
-
-        const [regionsResponse, citiesResponse, kpisResponse, pointsResponse] = await Promise.all(requests);
-
-        if (![regionsResponse, citiesResponse, kpisResponse, pointsResponse].every((response) => response.ok)) {
-          throw new Error('API unavailable');
-        }
-
-        const [regionsData, citiesData, kpisData, pointsData] = await Promise.all([
-          regionsResponse.json(),
-          citiesResponse.json(),
-          kpisResponse.json(),
-          pointsResponse.json()
-        ]);
-
+        const data = await loadApiData(selectedRegion, selectedCity);
         if (!isMounted) return;
 
-        setRegions(regionsData);
-        setCities(citiesData);
-        setKpis(kpisData);
-        setPoints(pointsData);
+        setRegions(data.regions);
+        setCities(data.cities);
+        setKpis(data.kpis);
+        setPoints(data.points);
         setIsOfflineMode(false);
       } catch {
         if (!isMounted) return;
 
-        const filteredKpis = filterBySelection(mockKpis, selectedRegion, selectedCity);
-        const filteredPoints = filterBySelection(mockPoints, selectedRegion, selectedCity);
+        const data = loadOfflineData(selectedRegion, selectedCity);
 
-        setRegions(getRegionsFromKpis(mockKpis));
-        setCities(getCitiesForRegion(mockKpis, selectedRegion));
-        setKpis(filteredKpis);
-        setPoints(filteredPoints);
+        setRegions(data.regions);
+        setCities(data.cities);
+        setKpis(data.kpis);
+        setPoints(data.points);
         setIsOfflineMode(true);
       }
     }
