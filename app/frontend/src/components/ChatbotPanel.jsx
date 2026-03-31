@@ -42,22 +42,24 @@ function buildContextPayload({ selectedRegion, selectedCity, summary, tariffOver
     type: 'dashboard_context',
     payload: {
       filters: {
-        region: selectedRegion || 'Toutes',
+        department: selectedRegion || 'Tous',
         city: selectedCity || 'Toutes'
       },
       summary: {
-        avgPrice: Number(summary.avgPrice.toFixed(2)),
-        avgOccupancy: Number((summary.avgOccupancy * 100).toFixed(1)),
+        averageScore: Number(summary.averageScore.toFixed(1)),
+        averageMotorizationPct: Number(summary.averageMotorization.toFixed(1)),
+        totalLots: summary.totalLots,
         topCity: summary.topCity,
-        cheapestRegion: tariffOverview.cheapestRegion
+        topDepartment: tariffOverview.topDepartment
       },
       visibleCities: kpis.slice(0, 5).map((row) => ({
-        date: row.date,
-        region: row.region,
+        codeCommune: row.code_commune,
+        department: row.department,
         city: row.city,
-        avgPrice: Number(row.avg_price.toFixed(2)),
-        avgOccupancy: Number((row.avg_occupancy * 100).toFixed(1)),
-        observations: row.observations
+        scorePotentiel: Number(row.score_potentiel.toFixed(1)),
+        tauxMotorisationPct: Number(row.taux_motorisation_pct.toFixed(1)),
+        lotsStationnement: row.nb_lots_stat_total,
+        copros: row.nb_copros
       }))
     }
   };
@@ -67,7 +69,7 @@ export function ChatbotPanel({
   selectedRegion,
   selectedCity,
   summary,
-  tariffOverview,
+  potentialOverview,
   kpis
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,8 +82,8 @@ export function ChatbotPanel({
   const clientId = import.meta.env.VITE_BOTPRESS_CLIENT_ID;
 
   const contextPayload = useMemo(
-    () => buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview, kpis }),
-    [selectedRegion, selectedCity, summary, tariffOverview, kpis]
+    () => buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview: potentialOverview, kpis }),
+    [selectedRegion, selectedCity, summary, potentialOverview, kpis]
   );
   const isConfigured = Boolean(botId && clientId);
 

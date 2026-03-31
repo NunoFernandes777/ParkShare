@@ -1,0 +1,2720 @@
+[
+    {
+        "code_commune":  "04070",
+        "longitude":  6.2495,
+        "latitude":  44.0954,
+        "nom":  "Digne-les-Bains"
+    },
+    {
+        "code_commune":  "06029",
+        "longitude":  7.0152,
+        "latitude":  43.5454,
+        "nom":  "Cannes"
+    },
+    {
+        "code_commune":  "06033",
+        "longitude":  7.1798,
+        "latitude":  43.785,
+        "nom":  "Carros"
+    },
+    {
+        "code_commune":  "06054",
+        "longitude":  7.3395,
+        "latitude":  43.7587,
+        "nom":  "Drap"
+    },
+    {
+        "code_commune":  "06069",
+        "longitude":  6.937,
+        "latitude":  43.656,
+        "nom":  "Grasse"
+    },
+    {
+        "code_commune":  "06088",
+        "longitude":  7.2528,
+        "latitude":  43.7032,
+        "nom":  "Nice"
+    },
+    {
+        "code_commune":  "06157",
+        "longitude":  7.0995,
+        "latitude":  43.7373,
+        "nom":  "Vence"
+    },
+    {
+        "code_commune":  "07019",
+        "longitude":  4.3942,
+        "latitude":  44.6107,
+        "nom":  "Aubenas"
+    },
+    {
+        "code_commune":  "07186",
+        "longitude":  4.5949,
+        "latitude":  44.7214,
+        "nom":  "Privas"
+    },
+    {
+        "code_commune":  "08409",
+        "longitude":  4.9269,
+        "latitude":  49.6993,
+        "nom":  "Sedan"
+    },
+    {
+        "code_commune":  "09122",
+        "longitude":  1.609,
+        "latitude":  42.9701,
+        "nom":  "Foix"
+    },
+    {
+        "code_commune":  "09225",
+        "longitude":  1.6168,
+        "latitude":  43.1278,
+        "nom":  "Pamiers"
+    },
+    {
+        "code_commune":  "10081",
+        "longitude":  4.0303,
+        "latitude":  48.3165,
+        "nom":  "La Chapelle-Saint-Luc"
+    },
+    {
+        "code_commune":  "10323",
+        "longitude":  3.7158,
+        "latitude":  48.5158,
+        "nom":  "Romilly-sur-Seine"
+    },
+    {
+        "code_commune":  "10387",
+        "longitude":  4.0761,
+        "latitude":  48.2924,
+        "nom":  "Troyes"
+    },
+    {
+        "code_commune":  "11069",
+        "longitude":  2.3491,
+        "latitude":  43.2078,
+        "nom":  "Carcassonne"
+    },
+    {
+        "code_commune":  "11203",
+        "longitude":  2.7649,
+        "latitude":  43.1983,
+        "nom":  "Lézignan-Corbières"
+    },
+    {
+        "code_commune":  "11206",
+        "longitude":  2.2452,
+        "latitude":  43.0464,
+        "nom":  "Limoux"
+    },
+    {
+        "code_commune":  "11262",
+        "longitude":  3.0337,
+        "latitude":  43.1493,
+        "nom":  "Narbonne"
+    },
+    {
+        "code_commune":  "12145",
+        "longitude":  3.1176,
+        "latitude":  44.0982,
+        "nom":  "Millau"
+    },
+    {
+        "code_commune":  "12176",
+        "longitude":  2.5614,
+        "latitude":  44.3824,
+        "nom":  "Onet-le-Château"
+    },
+    {
+        "code_commune":  "12300",
+        "longitude":  2.0296,
+        "latitude":  44.3471,
+        "nom":  "Villefranche-de-Rouergue"
+    },
+    {
+        "code_commune":  "13001",
+        "longitude":  5.3879,
+        "latitude":  43.536,
+        "nom":  "Aix-en-Provence"
+    },
+    {
+        "code_commune":  "13004",
+        "longitude":  4.6513,
+        "latitude":  43.5441,
+        "nom":  "Arles"
+    },
+    {
+        "code_commune":  "13027",
+        "longitude":  4.8344,
+        "latitude":  43.8829,
+        "nom":  "Châteaurenard"
+    },
+    {
+        "code_commune":  "13047",
+        "longitude":  4.9477,
+        "latitude":  43.5455,
+        "nom":  "Istres"
+    },
+    {
+        "code_commune":  "13054",
+        "longitude":  5.2178,
+        "latitude":  43.4218,
+        "nom":  "Marignane"
+    },
+    {
+        "code_commune":  "13056",
+        "longitude":  5.0451,
+        "latitude":  43.3839,
+        "nom":  "Martigues"
+    },
+    {
+        "code_commune":  "13063",
+        "longitude":  5.0148,
+        "latitude":  43.5841,
+        "nom":  "Miramas"
+    },
+    {
+        "code_commune":  "13077",
+        "longitude":  4.9993,
+        "latitude":  43.4207,
+        "nom":  "Port-de-Bouc"
+    },
+    {
+        "code_commune":  "13103",
+        "longitude":  5.049,
+        "latitude":  43.643,
+        "nom":  "Salon-de-Provence"
+    },
+    {
+        "code_commune":  "13108",
+        "longitude":  4.6852,
+        "latitude":  43.7972,
+        "nom":  "Tarascon"
+    },
+    {
+        "code_commune":  "13117",
+        "longitude":  5.2656,
+        "latitude":  43.4509,
+        "nom":  "Vitrolles"
+    },
+    {
+        "code_commune":  "13201",
+        "longitude":  5.3828,
+        "latitude":  43.3002,
+        "nom":  "Marseille 1er Arrondissement"
+    },
+    {
+        "code_commune":  "13202",
+        "longitude":  5.3497,
+        "latitude":  43.3225,
+        "nom":  "Marseille 2e Arrondissement"
+    },
+    {
+        "code_commune":  "13203",
+        "longitude":  5.3806,
+        "latitude":  43.3113,
+        "nom":  "Marseille 3e Arrondissement"
+    },
+    {
+        "code_commune":  "13209",
+        "longitude":  5.4523,
+        "latitude":  43.2366,
+        "nom":  "Marseille 9e Arrondissement"
+    },
+    {
+        "code_commune":  "13210",
+        "longitude":  5.4243,
+        "latitude":  43.2743,
+        "nom":  "Marseille 10e Arrondissement"
+    },
+    {
+        "code_commune":  "13211",
+        "longitude":  5.4787,
+        "latitude":  43.2877,
+        "nom":  "Marseille 11e Arrondissement"
+    },
+    {
+        "code_commune":  "13213",
+        "longitude":  5.4301,
+        "latitude":  43.3528,
+        "nom":  "Marseille 13e Arrondissement"
+    },
+    {
+        "code_commune":  "13214",
+        "longitude":  5.3915,
+        "latitude":  43.3468,
+        "nom":  "Marseille 14e Arrondissement"
+    },
+    {
+        "code_commune":  "13215",
+        "longitude":  5.3653,
+        "latitude":  43.3531,
+        "nom":  "Marseille 15e Arrondissement"
+    },
+    {
+        "code_commune":  "13216",
+        "longitude":  5.3161,
+        "latitude":  43.3642,
+        "nom":  "Marseille 16e Arrondissement"
+    },
+    {
+        "code_commune":  "14118",
+        "longitude":  -0.3722,
+        "latitude":  49.1846,
+        "nom":  "Caen"
+    },
+    {
+        "code_commune":  "14327",
+        "longitude":  -0.3324,
+        "latitude":  49.2042,
+        "nom":  "Hérouville-Saint-Clair"
+    },
+    {
+        "code_commune":  "14333",
+        "longitude":  0.2297,
+        "latitude":  49.4086,
+        "nom":  "Honfleur"
+    },
+    {
+        "code_commune":  "14366",
+        "longitude":  0.2426,
+        "latitude":  49.1477,
+        "nom":  "Lisieux"
+    },
+    {
+        "code_commune":  "16015",
+        "longitude":  0.145,
+        "latitude":  45.6458,
+        "nom":  "Angoulême"
+    },
+    {
+        "code_commune":  "16113",
+        "longitude":  0.108,
+        "latitude":  45.6095,
+        "nom":  "La Couronne"
+    },
+    {
+        "code_commune":  "17299",
+        "longitude":  -0.9745,
+        "latitude":  45.9455,
+        "nom":  "Rochefort"
+    },
+    {
+        "code_commune":  "17300",
+        "longitude":  -1.1765,
+        "latitude":  46.162,
+        "nom":  "La Rochelle"
+    },
+    {
+        "code_commune":  "17306",
+        "longitude":  -1.0127,
+        "latitude":  45.6343,
+        "nom":  "Royan"
+    },
+    {
+        "code_commune":  "17415",
+        "longitude":  -0.6456,
+        "latitude":  45.7462,
+        "nom":  "Saintes"
+    },
+    {
+        "code_commune":  "18033",
+        "longitude":  2.3983,
+        "latitude":  47.078,
+        "nom":  "Bourges"
+    },
+    {
+        "code_commune":  "18279",
+        "longitude":  2.0776,
+        "latitude":  47.2351,
+        "nom":  "Vierzon"
+    },
+    {
+        "code_commune":  "19031",
+        "longitude":  1.5144,
+        "latitude":  45.145,
+        "nom":  "Brive-la-Gaillarde"
+    },
+    {
+        "code_commune":  "21166",
+        "longitude":  5.0001,
+        "latitude":  47.2911,
+        "nom":  "Chenôve"
+    },
+    {
+        "code_commune":  "21231",
+        "longitude":  5.0322,
+        "latitude":  47.3319,
+        "nom":  "Dijon"
+    },
+    {
+        "code_commune":  "21355",
+        "longitude":  5.0585,
+        "latitude":  47.2855,
+        "nom":  "Longvic"
+    },
+    {
+        "code_commune":  "22050",
+        "longitude":  -2.0533,
+        "latitude":  48.4471,
+        "nom":  "Dinan"
+    },
+    {
+        "code_commune":  "22113",
+        "longitude":  -3.4697,
+        "latitude":  48.7454,
+        "nom":  "Lannion"
+    },
+    {
+        "code_commune":  "22278",
+        "longitude":  -2.7657,
+        "latitude":  48.5108,
+        "nom":  "Saint-Brieuc"
+    },
+    {
+        "code_commune":  "23096",
+        "longitude":  1.8705,
+        "latitude":  46.1585,
+        "nom":  "Guéret"
+    },
+    {
+        "code_commune":  "24037",
+        "longitude":  0.4883,
+        "latitude":  44.8519,
+        "nom":  "Bergerac"
+    },
+    {
+        "code_commune":  "24138",
+        "longitude":  0.6861,
+        "latitude":  45.1712,
+        "nom":  "Coulounieix-Chamiers"
+    },
+    {
+        "code_commune":  "25056",
+        "longitude":  6.0123,
+        "latitude":  47.2602,
+        "nom":  "Besançon"
+    },
+    {
+        "code_commune":  "25057",
+        "longitude":  6.7988,
+        "latitude":  47.5418,
+        "nom":  "Bethoncourt"
+    },
+    {
+        "code_commune":  "25284",
+        "longitude":  6.823,
+        "latitude":  47.5332,
+        "nom":  "Grand-Charmont"
+    },
+    {
+        "code_commune":  "25388",
+        "longitude":  6.7834,
+        "latitude":  47.5168,
+        "nom":  "Montbéliard"
+    },
+    {
+        "code_commune":  "25462",
+        "longitude":  6.3796,
+        "latitude":  46.9167,
+        "nom":  "Pontarlier"
+    },
+    {
+        "code_commune":  "25547",
+        "longitude":  6.8305,
+        "latitude":  47.5146,
+        "nom":  "Sochaux"
+    },
+    {
+        "code_commune":  "25580",
+        "longitude":  6.8243,
+        "latitude":  47.464,
+        "nom":  "Valentigney"
+    },
+    {
+        "code_commune":  "26166",
+        "longitude":  4.8141,
+        "latitude":  44.7495,
+        "nom":  "Loriol-sur-Drôme"
+    },
+    {
+        "code_commune":  "26198",
+        "longitude":  4.7454,
+        "latitude":  44.5545,
+        "nom":  "Montélimar"
+    },
+    {
+        "code_commune":  "26281",
+        "longitude":  5.0477,
+        "latitude":  45.0611,
+        "nom":  "Romans-sur-Isère"
+    },
+    {
+        "code_commune":  "26362",
+        "longitude":  4.9164,
+        "latitude":  44.9234,
+        "nom":  "Valence"
+    },
+    {
+        "code_commune":  "27229",
+        "longitude":  1.1406,
+        "latitude":  49.018,
+        "nom":  "Évreux"
+    },
+    {
+        "code_commune":  "27701",
+        "longitude":  1.2142,
+        "latitude":  49.264,
+        "nom":  "Val-de-Reuil"
+    },
+    {
+        "code_commune":  "28085",
+        "longitude":  1.5046,
+        "latitude":  48.4481,
+        "nom":  "Chartres"
+    },
+    {
+        "code_commune":  "28088",
+        "longitude":  1.3207,
+        "latitude":  48.0718,
+        "nom":  "Châteaudun"
+    },
+    {
+        "code_commune":  "28229",
+        "longitude":  1.4471,
+        "latitude":  48.4651,
+        "nom":  "Mainvilliers"
+    },
+    {
+        "code_commune":  "29019",
+        "longitude":  -4.4996,
+        "latitude":  48.4085,
+        "nom":  "Brest"
+    },
+    {
+        "code_commune":  "29232",
+        "longitude":  -4.0972,
+        "latitude":  47.9982,
+        "nom":  "Quimper"
+    },
+    {
+        "code_commune":  "2A004",
+        "longitude":  8.7058,
+        "latitude":  41.9228,
+        "nom":  "Ajaccio"
+    },
+    {
+        "code_commune":  "2B033",
+        "longitude":  9.424,
+        "latitude":  42.6861,
+        "nom":  "Bastia"
+    },
+    {
+        "code_commune":  "30007",
+        "longitude":  4.0905,
+        "latitude":  44.125,
+        "nom":  "Alès"
+    },
+    {
+        "code_commune":  "30010",
+        "longitude":  3.9766,
+        "latitude":  44.054,
+        "nom":  "Anduze"
+    },
+    {
+        "code_commune":  "30028",
+        "longitude":  4.6244,
+        "latitude":  44.1622,
+        "nom":  "Bagnols-sur-Cèze"
+    },
+    {
+        "code_commune":  "30032",
+        "longitude":  4.5912,
+        "latitude":  43.7815,
+        "nom":  "Beaucaire"
+    },
+    {
+        "code_commune":  "30189",
+        "longitude":  4.3429,
+        "latitude":  43.8322,
+        "nom":  "Nîmes"
+    },
+    {
+        "code_commune":  "30202",
+        "longitude":  4.6422,
+        "latitude":  44.2518,
+        "nom":  "Pont-Saint-Esprit"
+    },
+    {
+        "code_commune":  "30227",
+        "longitude":  4.1913,
+        "latitude":  44.2489,
+        "nom":  "Saint-Ambroix"
+    },
+    {
+        "code_commune":  "30258",
+        "longitude":  4.4128,
+        "latitude":  43.6606,
+        "nom":  "Saint-Gilles"
+    },
+    {
+        "code_commune":  "30334",
+        "longitude":  4.416,
+        "latitude":  44.0289,
+        "nom":  "Uzès"
+    },
+    {
+        "code_commune":  "30341",
+        "longitude":  4.3103,
+        "latitude":  43.626,
+        "nom":  "Vauvert"
+    },
+    {
+        "code_commune":  "31069",
+        "longitude":  1.377,
+        "latitude":  43.641,
+        "nom":  "Blagnac"
+    },
+    {
+        "code_commune":  "31149",
+        "longitude":  1.3245,
+        "latitude":  43.6116,
+        "nom":  "Colomiers"
+    },
+    {
+        "code_commune":  "31157",
+        "longitude":  1.3432,
+        "latitude":  43.5446,
+        "nom":  "Cugnaux"
+    },
+    {
+        "code_commune":  "31395",
+        "longitude":  1.2987,
+        "latitude":  43.4407,
+        "nom":  "Muret"
+    },
+    {
+        "code_commune":  "31483",
+        "longitude":  0.7254,
+        "latitude":  43.1209,
+        "nom":  "Saint-Gaudens"
+    },
+    {
+        "code_commune":  "31555",
+        "longitude":  1.4328,
+        "latitude":  43.6007,
+        "nom":  "Toulouse"
+    },
+    {
+        "code_commune":  "33032",
+        "longitude":  -0.526,
+        "latitude":  44.9068,
+        "nom":  "Bassens"
+    },
+    {
+        "code_commune":  "33039",
+        "longitude":  -0.5485,
+        "latitude":  44.803,
+        "nom":  "Bègles"
+    },
+    {
+        "code_commune":  "33063",
+        "longitude":  -0.5848,
+        "latitude":  44.8624,
+        "nom":  "Bordeaux"
+    },
+    {
+        "code_commune":  "33119",
+        "longitude":  -0.5223,
+        "latitude":  44.8552,
+        "nom":  "Cenon"
+    },
+    {
+        "code_commune":  "33138",
+        "longitude":  -0.1003,
+        "latitude":  45.0408,
+        "nom":  "Coutras"
+    },
+    {
+        "code_commune":  "33162",
+        "longitude":  -0.646,
+        "latitude":  44.8779,
+        "nom":  "Eysines"
+    },
+    {
+        "code_commune":  "33167",
+        "longitude":  -0.5215,
+        "latitude":  44.8322,
+        "nom":  "Floirac"
+    },
+    {
+        "code_commune":  "33249",
+        "longitude":  -0.5176,
+        "latitude":  44.8749,
+        "nom":  "Lormont"
+    },
+    {
+        "code_commune":  "33318",
+        "longitude":  -0.681,
+        "latitude":  44.786,
+        "nom":  "Pessac"
+    },
+    {
+        "code_commune":  "33324",
+        "longitude":  0.2284,
+        "latitude":  44.8242,
+        "nom":  "Pineuilh"
+    },
+    {
+        "code_commune":  "33402",
+        "longitude":  0.2171,
+        "latitude":  44.8407,
+        "nom":  "Sainte-Foy-la-Grande"
+    },
+    {
+        "code_commune":  "33522",
+        "longitude":  -0.5918,
+        "latitude":  44.8061,
+        "nom":  "Talence"
+    },
+    {
+        "code_commune":  "34003",
+        "longitude":  3.4838,
+        "latitude":  43.3084,
+        "nom":  "Agde"
+    },
+    {
+        "code_commune":  "34028",
+        "longitude":  3.1637,
+        "latitude":  43.6113,
+        "nom":  "Bédarieux"
+    },
+    {
+        "code_commune":  "34032",
+        "longitude":  3.2342,
+        "latitude":  43.3481,
+        "nom":  "Béziers"
+    },
+    {
+        "code_commune":  "34142",
+        "longitude":  3.2949,
+        "latitude":  43.7296,
+        "nom":  "Lodève"
+    },
+    {
+        "code_commune":  "34145",
+        "longitude":  4.1329,
+        "latitude":  43.678,
+        "nom":  "Lunel"
+    },
+    {
+        "code_commune":  "34172",
+        "longitude":  3.8742,
+        "latitude":  43.61,
+        "nom":  "Montpellier"
+    },
+    {
+        "code_commune":  "34301",
+        "longitude":  3.6441,
+        "latitude":  43.3844,
+        "nom":  "Sète"
+    },
+    {
+        "code_commune":  "35238",
+        "longitude":  -1.6884,
+        "latitude":  48.1159,
+        "nom":  "Rennes"
+    },
+    {
+        "code_commune":  "35288",
+        "longitude":  -2.0066,
+        "latitude":  48.6465,
+        "nom":  "Saint-Malo"
+    },
+    {
+        "code_commune":  "36044",
+        "longitude":  1.6903,
+        "latitude":  46.8023,
+        "nom":  "Châteauroux"
+    },
+    {
+        "code_commune":  "37003",
+        "longitude":  0.9989,
+        "latitude":  47.3967,
+        "nom":  "Amboise"
+    },
+    {
+        "code_commune":  "37122",
+        "longitude":  0.6544,
+        "latitude":  47.3374,
+        "nom":  "Joué-lès-Tours"
+    },
+    {
+        "code_commune":  "37195",
+        "longitude":  0.6371,
+        "latitude":  47.3815,
+        "nom":  "La Riche"
+    },
+    {
+        "code_commune":  "37233",
+        "longitude":  0.7334,
+        "latitude":  47.3876,
+        "nom":  "Saint-Pierre-des-Corps"
+    },
+    {
+        "code_commune":  "37261",
+        "longitude":  0.6949,
+        "latitude":  47.3943,
+        "nom":  "Tours"
+    },
+    {
+        "code_commune":  "38053",
+        "longitude":  5.2747,
+        "latitude":  45.6025,
+        "nom":  "Bourgoin-Jallieu"
+    },
+    {
+        "code_commune":  "38151",
+        "longitude":  5.7148,
+        "latitude":  45.1441,
+        "nom":  "Échirolles"
+    },
+    {
+        "code_commune":  "38185",
+        "longitude":  5.7155,
+        "latitude":  45.1842,
+        "nom":  "Grenoble"
+    },
+    {
+        "code_commune":  "38193",
+        "longitude":  5.2234,
+        "latitude":  45.6153,
+        "nom":  "L\u0027Isle-d\u0027Abeau"
+    },
+    {
+        "code_commune":  "38298",
+        "longitude":  4.7825,
+        "latitude":  45.3723,
+        "nom":  "Le Péage-de-Roussillon"
+    },
+    {
+        "code_commune":  "38318",
+        "longitude":  4.9278,
+        "latitude":  45.5335,
+        "nom":  "Pont-Évêque"
+    },
+    {
+        "code_commune":  "38421",
+        "longitude":  5.7646,
+        "latitude":  45.1782,
+        "nom":  "Saint-Martin-d\u0027Hères"
+    },
+    {
+        "code_commune":  "38544",
+        "longitude":  4.8803,
+        "latitude":  45.5221,
+        "nom":  "Vienne"
+    },
+    {
+        "code_commune":  "38553",
+        "longitude":  5.1549,
+        "latitude":  45.6161,
+        "nom":  "Villefontaine"
+    },
+    {
+        "code_commune":  "39198",
+        "longitude":  5.5024,
+        "latitude":  47.0739,
+        "nom":  "Dole"
+    },
+    {
+        "code_commune":  "40088",
+        "longitude":  -1.0637,
+        "latitude":  43.7025,
+        "nom":  "Dax"
+    },
+    {
+        "code_commune":  "40192",
+        "longitude":  -0.5009,
+        "latitude":  43.8931,
+        "nom":  "Mont-de-Marsan"
+    },
+    {
+        "code_commune":  "41018",
+        "longitude":  1.3049,
+        "latitude":  47.5813,
+        "nom":  "Blois"
+    },
+    {
+        "code_commune":  "42005",
+        "longitude":  4.2773,
+        "latitude":  45.5353,
+        "nom":  "Andrézieux-Bouthéon"
+    },
+    {
+        "code_commune":  "42044",
+        "longitude":  4.3375,
+        "latitude":  45.391,
+        "nom":  "Le Chambon-Feugerolles"
+    },
+    {
+        "code_commune":  "42103",
+        "longitude":  4.5569,
+        "latitude":  45.5042,
+        "nom":  "La Grand-Croix"
+    },
+    {
+        "code_commune":  "42147",
+        "longitude":  4.0719,
+        "latitude":  45.6016,
+        "nom":  "Montbrison"
+    },
+    {
+        "code_commune":  "42183",
+        "longitude":  4.3723,
+        "latitude":  45.4045,
+        "nom":  "La Ricamarie"
+    },
+    {
+        "code_commune":  "42186",
+        "longitude":  4.6175,
+        "latitude":  45.5211,
+        "nom":  "Rive-de-Gier"
+    },
+    {
+        "code_commune":  "42187",
+        "longitude":  4.0797,
+        "latitude":  46.0443,
+        "nom":  "Roanne"
+    },
+    {
+        "code_commune":  "42207",
+        "longitude":  4.5082,
+        "latitude":  45.4687,
+        "nom":  "Saint-Chamond"
+    },
+    {
+        "code_commune":  "42218",
+        "longitude":  4.3665,
+        "latitude":  45.4241,
+        "nom":  "Saint-Étienne"
+    },
+    {
+        "code_commune":  "43157",
+        "longitude":  3.8973,
+        "latitude":  45.0283,
+        "nom":  "Le Puy-en-Velay"
+    },
+    {
+        "code_commune":  "44036",
+        "longitude":  -1.3912,
+        "latitude":  47.7199,
+        "nom":  "Châteaubriant"
+    },
+    {
+        "code_commune":  "44109",
+        "longitude":  -1.5603,
+        "latitude":  47.2382,
+        "nom":  "Nantes"
+    },
+    {
+        "code_commune":  "44114",
+        "longitude":  -1.6195,
+        "latitude":  47.2745,
+        "nom":  "Orvault"
+    },
+    {
+        "code_commune":  "44143",
+        "longitude":  -1.5573,
+        "latitude":  47.1733,
+        "nom":  "Rezé"
+    },
+    {
+        "code_commune":  "44162",
+        "longitude":  -1.6306,
+        "latitude":  47.2246,
+        "nom":  "Saint-Herblain"
+    },
+    {
+        "code_commune":  "44184",
+        "longitude":  -2.2392,
+        "latitude":  47.2768,
+        "nom":  "Saint-Nazaire"
+    },
+    {
+        "code_commune":  "45068",
+        "longitude":  2.7375,
+        "latitude":  48.0214,
+        "nom":  "Châlette-sur-Loing"
+    },
+    {
+        "code_commune":  "45147",
+        "longitude":  1.9223,
+        "latitude":  47.9449,
+        "nom":  "Fleury-les-Aubrais"
+    },
+    {
+        "code_commune":  "45208",
+        "longitude":  2.7388,
+        "latitude":  47.9998,
+        "nom":  "Montargis"
+    },
+    {
+        "code_commune":  "45234",
+        "longitude":  1.9122,
+        "latitude":  47.8734,
+        "nom":  "Orléans"
+    },
+    {
+        "code_commune":  "45252",
+        "longitude":  2.2501,
+        "latitude":  48.1805,
+        "nom":  "Pithiviers"
+    },
+    {
+        "code_commune":  "45284",
+        "longitude":  1.9695,
+        "latitude":  47.9216,
+        "nom":  "Saint-Jean-de-Braye"
+    },
+    {
+        "code_commune":  "45315",
+        "longitude":  2.3499,
+        "latitude":  47.751,
+        "nom":  "Sully-sur-Loire"
+    },
+    {
+        "code_commune":  "46042",
+        "longitude":  1.439,
+        "latitude":  44.4565,
+        "nom":  "Cahors"
+    },
+    {
+        "code_commune":  "47001",
+        "longitude":  0.6302,
+        "latitude":  44.201,
+        "nom":  "Agen"
+    },
+    {
+        "code_commune":  "47252",
+        "longitude":  0.6005,
+        "latitude":  44.4064,
+        "nom":  "Sainte-Livrade-sur-Lot"
+    },
+    {
+        "code_commune":  "47310",
+        "longitude":  0.3296,
+        "latitude":  44.3842,
+        "nom":  "Tonneins"
+    },
+    {
+        "code_commune":  "47323",
+        "longitude":  0.7484,
+        "latitude":  44.4183,
+        "nom":  "Villeneuve-sur-Lot"
+    },
+    {
+        "code_commune":  "49007",
+        "longitude":  -0.5629,
+        "latitude":  47.4819,
+        "nom":  "Angers"
+    },
+    {
+        "code_commune":  "49099",
+        "longitude":  -0.875,
+        "latitude":  47.0358,
+        "nom":  "Cholet"
+    },
+    {
+        "code_commune":  "49328",
+        "longitude":  -0.0837,
+        "latitude":  47.2645,
+        "nom":  "Saumur"
+    },
+    {
+        "code_commune":  "49353",
+        "longitude":  -0.478,
+        "latitude":  47.4522,
+        "nom":  "Trélazé"
+    },
+    {
+        "code_commune":  "50025",
+        "longitude":  -1.3452,
+        "latitude":  48.6759,
+        "nom":  "Avranches"
+    },
+    {
+        "code_commune":  "50129",
+        "longitude":  -1.6356,
+        "latitude":  49.6277,
+        "nom":  "Cherbourg-en-Cotentin"
+    },
+    {
+        "code_commune":  "50502",
+        "longitude":  -1.0812,
+        "latitude":  49.1123,
+        "nom":  "Saint-Lô"
+    },
+    {
+        "code_commune":  "51454",
+        "longitude":  4.0551,
+        "latitude":  49.2535,
+        "nom":  "Reims"
+    },
+    {
+        "code_commune":  "52448",
+        "longitude":  4.9399,
+        "latitude":  48.6319,
+        "nom":  "Saint-Dizier"
+    },
+    {
+        "code_commune":  "54115",
+        "longitude":  6.1268,
+        "latitude":  48.7199,
+        "nom":  "Champigneulles"
+    },
+    {
+        "code_commune":  "54261",
+        "longitude":  5.793,
+        "latitude":  49.5187,
+        "nom":  "Herserange"
+    },
+    {
+        "code_commune":  "54304",
+        "longitude":  6.1183,
+        "latitude":  48.6839,
+        "nom":  "Laxou"
+    },
+    {
+        "code_commune":  "54323",
+        "longitude":  5.7672,
+        "latitude":  49.5217,
+        "nom":  "Longwy"
+    },
+    {
+        "code_commune":  "54329",
+        "longitude":  6.5101,
+        "latitude":  48.5963,
+        "nom":  "Lunéville"
+    },
+    {
+        "code_commune":  "54357",
+        "longitude":  6.1432,
+        "latitude":  48.7093,
+        "nom":  "Maxéville"
+    },
+    {
+        "code_commune":  "54395",
+        "longitude":  6.1734,
+        "latitude":  48.6881,
+        "nom":  "Nancy"
+    },
+    {
+        "code_commune":  "54431",
+        "longitude":  6.047,
+        "latitude":  48.9222,
+        "nom":  "Pont-à-Mousson"
+    },
+    {
+        "code_commune":  "54482",
+        "longitude":  6.2041,
+        "latitude":  48.7061,
+        "nom":  "Saint-Max"
+    },
+    {
+        "code_commune":  "54526",
+        "longitude":  6.2212,
+        "latitude":  48.6851,
+        "nom":  "Tomblaine"
+    },
+    {
+        "code_commune":  "54547",
+        "longitude":  6.1603,
+        "latitude":  48.66,
+        "nom":  "Vandœuvre-lès-Nancy"
+    },
+    {
+        "code_commune":  "55029",
+        "longitude":  5.1732,
+        "latitude":  48.7628,
+        "nom":  "Bar-le-Duc"
+    },
+    {
+        "code_commune":  "55545",
+        "longitude":  5.3609,
+        "latitude":  49.144,
+        "nom":  "Verdun"
+    },
+    {
+        "code_commune":  "56007",
+        "longitude":  -2.9901,
+        "latitude":  47.6684,
+        "nom":  "Auray"
+    },
+    {
+        "code_commune":  "56098",
+        "longitude":  -3.326,
+        "latitude":  47.7686,
+        "nom":  "Lanester"
+    },
+    {
+        "code_commune":  "56121",
+        "longitude":  -3.3799,
+        "latitude":  47.7494,
+        "nom":  "Lorient"
+    },
+    {
+        "code_commune":  "56260",
+        "longitude":  -2.7485,
+        "latitude":  47.6577,
+        "nom":  "Vannes"
+    },
+    {
+        "code_commune":  "57160",
+        "longitude":  6.6785,
+        "latitude":  49.2113,
+        "nom":  "Creutzwald"
+    },
+    {
+        "code_commune":  "57227",
+        "longitude":  6.8985,
+        "latitude":  49.1916,
+        "nom":  "Forbach"
+    },
+    {
+        "code_commune":  "57269",
+        "longitude":  6.2029,
+        "latitude":  49.2985,
+        "nom":  "Guénange"
+    },
+    {
+        "code_commune":  "57332",
+        "longitude":  6.7703,
+        "latitude":  49.1262,
+        "nom":  "Hombourg-Haut"
+    },
+    {
+        "code_commune":  "57463",
+        "longitude":  6.1962,
+        "latitude":  49.1048,
+        "nom":  "Metz"
+    },
+    {
+        "code_commune":  "57630",
+        "longitude":  7.0476,
+        "latitude":  48.7329,
+        "nom":  "Sarrebourg"
+    },
+    {
+        "code_commune":  "57631",
+        "longitude":  7.0709,
+        "latitude":  49.106,
+        "nom":  "Sarreguemines"
+    },
+    {
+        "code_commune":  "57751",
+        "longitude":  6.1552,
+        "latitude":  49.1651,
+        "nom":  "Woippy"
+    },
+    {
+        "code_commune":  "57757",
+        "longitude":  6.2,
+        "latitude":  49.357,
+        "nom":  "Yutz"
+    },
+    {
+        "code_commune":  "58194",
+        "longitude":  3.1598,
+        "latitude":  46.9852,
+        "nom":  "Nevers"
+    },
+    {
+        "code_commune":  "59009",
+        "longitude":  3.1619,
+        "latitude":  50.6362,
+        "nom":  "Villeneuve-d\u0027Ascq"
+    },
+    {
+        "code_commune":  "59017",
+        "longitude":  2.8787,
+        "latitude":  50.6925,
+        "nom":  "Armentières"
+    },
+    {
+        "code_commune":  "59028",
+        "longitude":  3.0612,
+        "latitude":  50.4143,
+        "nom":  "Auby"
+    },
+    {
+        "code_commune":  "59122",
+        "longitude":  3.2413,
+        "latitude":  50.1722,
+        "nom":  "Cambrai"
+    },
+    {
+        "code_commune":  "59183",
+        "longitude":  2.3431,
+        "latitude":  51.0183,
+        "nom":  "Dunkerque"
+    },
+    {
+        "code_commune":  "59253",
+        "longitude":  3.58,
+        "latitude":  50.4321,
+        "nom":  "Fresnes-sur-Escaut"
+    },
+    {
+        "code_commune":  "59271",
+        "longitude":  2.2938,
+        "latitude":  51.0157,
+        "nom":  "Grande-Synthe"
+    },
+    {
+        "code_commune":  "59324",
+        "longitude":  4.1026,
+        "latitude":  50.29,
+        "nom":  "Jeumont"
+    },
+    {
+        "code_commune":  "59350",
+        "longitude":  3.0468,
+        "latitude":  50.6311,
+        "nom":  "Lille"
+    },
+    {
+        "code_commune":  "59378",
+        "longitude":  3.1006,
+        "latitude":  50.6793,
+        "nom":  "Marcq-en-Barœul"
+    },
+    {
+        "code_commune":  "59392",
+        "longitude":  3.9611,
+        "latitude":  50.2834,
+        "nom":  "Maubeuge"
+    },
+    {
+        "code_commune":  "59410",
+        "longitude":  3.1091,
+        "latitude":  50.6436,
+        "nom":  "Mons-en-Barœul"
+    },
+    {
+        "code_commune":  "59512",
+        "longitude":  3.1843,
+        "latitude":  50.6887,
+        "nom":  "Roubaix"
+    },
+    {
+        "code_commune":  "59560",
+        "longitude":  3.0268,
+        "latitude":  50.5453,
+        "nom":  "Seclin"
+    },
+    {
+        "code_commune":  "59599",
+        "longitude":  3.1577,
+        "latitude":  50.721,
+        "nom":  "Tourcoing"
+    },
+    {
+        "code_commune":  "59606",
+        "longitude":  3.5142,
+        "latitude":  50.362,
+        "nom":  "Valenciennes"
+    },
+    {
+        "code_commune":  "59648",
+        "longitude":  3.0389,
+        "latitude":  50.5862,
+        "nom":  "Wattignies"
+    },
+    {
+        "code_commune":  "60057",
+        "longitude":  2.0877,
+        "latitude":  49.4425,
+        "nom":  "Beauvais"
+    },
+    {
+        "code_commune":  "60157",
+        "longitude":  2.4099,
+        "latitude":  49.3782,
+        "nom":  "Clermont"
+    },
+    {
+        "code_commune":  "60175",
+        "longitude":  2.4841,
+        "latitude":  49.2557,
+        "nom":  "Creil"
+    },
+    {
+        "code_commune":  "60463",
+        "longitude":  2.4644,
+        "latitude":  49.2764,
+        "nom":  "Nogent-sur-Oise"
+    },
+    {
+        "code_commune":  "60471",
+        "longitude":  3.0074,
+        "latitude":  49.578,
+        "nom":  "Noyon"
+    },
+    {
+        "code_commune":  "60684",
+        "longitude":  2.492,
+        "latitude":  49.2889,
+        "nom":  "Villers-Saint-Paul"
+    },
+    {
+        "code_commune":  "61001",
+        "longitude":  0.0923,
+        "latitude":  48.431,
+        "nom":  "Alençon"
+    },
+    {
+        "code_commune":  "62014",
+        "longitude":  2.3962,
+        "latitude":  50.6457,
+        "nom":  "Aire-sur-la-Lys"
+    },
+    {
+        "code_commune":  "62041",
+        "longitude":  2.7679,
+        "latitude":  50.2893,
+        "nom":  "Arras"
+    },
+    {
+        "code_commune":  "62048",
+        "longitude":  2.4656,
+        "latitude":  50.5108,
+        "nom":  "Auchel"
+    },
+    {
+        "code_commune":  "62119",
+        "longitude":  2.6438,
+        "latitude":  50.5299,
+        "nom":  "Béthune"
+    },
+    {
+        "code_commune":  "62160",
+        "longitude":  1.6062,
+        "latitude":  50.7303,
+        "nom":  "Boulogne-sur-Mer"
+    },
+    {
+        "code_commune":  "62178",
+        "longitude":  2.5505,
+        "latitude":  50.4891,
+        "nom":  "Bruay-la-Buissière"
+    },
+    {
+        "code_commune":  "62193",
+        "longitude":  1.869,
+        "latitude":  50.9523,
+        "nom":  "Calais"
+    },
+    {
+        "code_commune":  "62498",
+        "longitude":  2.8191,
+        "latitude":  50.4395,
+        "nom":  "Lens"
+    },
+    {
+        "code_commune":  "62510",
+        "longitude":  2.7702,
+        "latitude":  50.4231,
+        "nom":  "Liévin"
+    },
+    {
+        "code_commune":  "62570",
+        "longitude":  2.8679,
+        "latitude":  50.3994,
+        "nom":  "Méricourt"
+    },
+    {
+        "code_commune":  "62667",
+        "longitude":  1.5758,
+        "latitude":  50.7159,
+        "nom":  "Le Portel"
+    },
+    {
+        "code_commune":  "62764",
+        "longitude":  2.7852,
+        "latitude":  50.3097,
+        "nom":  "Saint-Nicolas"
+    },
+    {
+        "code_commune":  "62765",
+        "longitude":  2.2648,
+        "latitude":  50.7673,
+        "nom":  "Saint-Omer"
+    },
+    {
+        "code_commune":  "63113",
+        "longitude":  3.1127,
+        "latitude":  45.787,
+        "nom":  "Clermont-Ferrand"
+    },
+    {
+        "code_commune":  "63430",
+        "longitude":  3.538,
+        "latitude":  45.8653,
+        "nom":  "Thiers"
+    },
+    {
+        "code_commune":  "64102",
+        "longitude":  -1.4611,
+        "latitude":  43.4844,
+        "nom":  "Bayonne"
+    },
+    {
+        "code_commune":  "64445",
+        "longitude":  -0.3435,
+        "latitude":  43.3219,
+        "nom":  "Pau"
+    },
+    {
+        "code_commune":  "65440",
+        "longitude":  0.0653,
+        "latitude":  43.2387,
+        "nom":  "Tarbes"
+    },
+    {
+        "code_commune":  "66065",
+        "longitude":  2.978,
+        "latitude":  42.6083,
+        "nom":  "Elne"
+    },
+    {
+        "code_commune":  "66136",
+        "longitude":  2.9045,
+        "latitude":  42.699,
+        "nom":  "Perpignan"
+    },
+    {
+        "code_commune":  "67046",
+        "longitude":  7.8632,
+        "latitude":  48.7587,
+        "nom":  "Bischwiller"
+    },
+    {
+        "code_commune":  "67180",
+        "longitude":  7.8213,
+        "latitude":  48.8388,
+        "nom":  "Haguenau"
+    },
+    {
+        "code_commune":  "67267",
+        "longitude":  7.6837,
+        "latitude":  48.5543,
+        "nom":  "Lingolsheim"
+    },
+    {
+        "code_commune":  "67437",
+        "longitude":  7.3537,
+        "latitude":  48.743899999999996,
+        "nom":  "Saverne"
+    },
+    {
+        "code_commune":  "67482",
+        "longitude":  7.7621,
+        "latitude":  48.5691,
+        "nom":  "Strasbourg"
+    },
+    {
+        "code_commune":  "68066",
+        "longitude":  7.3924,
+        "latitude":  48.1115,
+        "nom":  "Colmar"
+    },
+    {
+        "code_commune":  "68154",
+        "longitude":  7.3622,
+        "latitude":  47.776,
+        "nom":  "Illzach"
+    },
+    {
+        "code_commune":  "68224",
+        "longitude":  7.3255,
+        "latitude":  47.7526,
+        "nom":  "Mulhouse"
+    },
+    {
+        "code_commune":  "68297",
+        "longitude":  7.543,
+        "latitude":  47.5986,
+        "nom":  "Saint-Louis"
+    },
+    {
+        "code_commune":  "68376",
+        "longitude":  7.3084,
+        "latitude":  47.8114,
+        "nom":  "Wittenheim"
+    },
+    {
+        "code_commune":  "69027",
+        "longitude":  4.7527,
+        "latitude":  45.6751,
+        "nom":  "Brignais"
+    },
+    {
+        "code_commune":  "69029",
+        "longitude":  4.9116,
+        "latitude":  45.7355,
+        "nom":  "Bron"
+    },
+    {
+        "code_commune":  "69091",
+        "longitude":  4.7561,
+        "latitude":  45.5845,
+        "nom":  "Givors"
+    },
+    {
+        "code_commune":  "69092",
+        "longitude":  4.6883,
+        "latitude":  45.9915,
+        "nom":  "Gleizé"
+    },
+    {
+        "code_commune":  "69096",
+        "longitude":  4.7858,
+        "latitude":  45.6104,
+        "nom":  "Grigny-sur-Rhône"
+    },
+    {
+        "code_commune":  "69123",
+        "longitude":  4.8351,
+        "latitude":  45.758,
+        "nom":  "Lyon"
+    },
+    {
+        "code_commune":  "69149",
+        "longitude":  4.8112,
+        "latitude":  45.708,
+        "nom":  "Oullins-Pierre-Bénite"
+    },
+    {
+        "code_commune":  "69199",
+        "longitude":  4.8514,
+        "latitude":  45.6997,
+        "nom":  "Saint-Fons"
+    },
+    {
+        "code_commune":  "69256",
+        "longitude":  4.925,
+        "latitude":  45.7776,
+        "nom":  "Vaulx-en-Velin"
+    },
+    {
+        "code_commune":  "69259",
+        "longitude":  4.8805,
+        "latitude":  45.7012,
+        "nom":  "Vénissieux"
+    },
+    {
+        "code_commune":  "69264",
+        "longitude":  4.726,
+        "latitude":  45.9837,
+        "nom":  "Villefranche-sur-Saône"
+    },
+    {
+        "code_commune":  "69266",
+        "longitude":  4.8898,
+        "latitude":  45.7719,
+        "nom":  "Villeurbanne"
+    },
+    {
+        "code_commune":  "69282",
+        "longitude":  5.0114,
+        "latitude":  45.7785,
+        "nom":  "Meyzieu"
+    },
+    {
+        "code_commune":  "69286",
+        "longitude":  4.895,
+        "latitude":  45.8265,
+        "nom":  "Rillieux-la-Pape"
+    },
+    {
+        "code_commune":  "69290",
+        "longitude":  4.9474,
+        "latitude":  45.7014,
+        "nom":  "Saint-Priest"
+    },
+    {
+        "code_commune":  "69383",
+        "longitude":  4.8685,
+        "latitude":  45.7514,
+        "nom":  "Lyon 3e Arrondissement"
+    },
+    {
+        "code_commune":  "69387",
+        "longitude":  4.8393,
+        "latitude":  45.7321,
+        "nom":  "Lyon 7e Arrondissement"
+    },
+    {
+        "code_commune":  "69388",
+        "longitude":  4.8695,
+        "latitude":  45.7342,
+        "nom":  "Lyon 8e Arrondissement"
+    },
+    {
+        "code_commune":  "69389",
+        "longitude":  4.8128,
+        "latitude":  45.7836,
+        "nom":  "Lyon 9e Arrondissement"
+    },
+    {
+        "code_commune":  "70279",
+        "longitude":  5.6153,
+        "latitude":  47.431,
+        "nom":  "Gray"
+    },
+    {
+        "code_commune":  "70311",
+        "longitude":  6.3578,
+        "latitude":  47.8252,
+        "nom":  "Luxeuil-les-Bains"
+    },
+    {
+        "code_commune":  "71076",
+        "longitude":  4.8509,
+        "latitude":  46.7896,
+        "nom":  "Chalon-sur-Saône"
+    },
+    {
+        "code_commune":  "71270",
+        "longitude":  4.8083,
+        "latitude":  46.3265,
+        "nom":  "Mâcon"
+    },
+    {
+        "code_commune":  "72003",
+        "longitude":  0.1447,
+        "latitude":  47.9588,
+        "nom":  "Allonnes"
+    },
+    {
+        "code_commune":  "72095",
+        "longitude":  0.2111,
+        "latitude":  48.0348,
+        "nom":  "Coulaines"
+    },
+    {
+        "code_commune":  "72181",
+        "longitude":  0.1957,
+        "latitude":  47.9819,
+        "nom":  "Le Mans"
+    },
+    {
+        "code_commune":  "73008",
+        "longitude":  5.9035,
+        "latitude":  45.6943,
+        "nom":  "Aix-les-Bains"
+    },
+    {
+        "code_commune":  "73065",
+        "longitude":  5.9064,
+        "latitude":  45.5822,
+        "nom":  "Chambéry"
+    },
+    {
+        "code_commune":  "74012",
+        "longitude":  6.2476,
+        "latitude":  46.189,
+        "nom":  "Annemasse"
+    },
+    {
+        "code_commune":  "74042",
+        "longitude":  6.404,
+        "latitude":  46.0786,
+        "nom":  "Bonneville"
+    },
+    {
+        "code_commune":  "74133",
+        "longitude":  6.2051,
+        "latitude":  46.1841,
+        "nom":  "Gaillard"
+    },
+    {
+        "code_commune":  "74281",
+        "longitude":  6.4776,
+        "latitude":  46.3745,
+        "nom":  "Thonon-les-Bains"
+    },
+    {
+        "code_commune":  "75056",
+        "longitude":  2.347,
+        "latitude":  48.8589,
+        "nom":  "Paris"
+    },
+    {
+        "code_commune":  "75111",
+        "longitude":  2.3816,
+        "latitude":  48.8601,
+        "nom":  "Paris 11e Arrondissement"
+    },
+    {
+        "code_commune":  "75113",
+        "longitude":  2.3656,
+        "latitude":  48.8303,
+        "nom":  "Paris 13e Arrondissement"
+    },
+    {
+        "code_commune":  "75118",
+        "longitude":  2.3487,
+        "latitude":  48.8919,
+        "nom":  "Paris 18e Arrondissement"
+    },
+    {
+        "code_commune":  "75119",
+        "longitude":  2.3878,
+        "latitude":  48.8871,
+        "nom":  "Paris 19e Arrondissement"
+    },
+    {
+        "code_commune":  "75120",
+        "longitude":  2.3966,
+        "latitude":  48.8625,
+        "nom":  "Paris 20e Arrondissement"
+    },
+    {
+        "code_commune":  "76157",
+        "longitude":  1.0173,
+        "latitude":  49.4323,
+        "nom":  "Canteleu"
+    },
+    {
+        "code_commune":  "76212",
+        "longitude":  1.1534,
+        "latitude":  49.4468,
+        "nom":  "Darnétal"
+    },
+    {
+        "code_commune":  "76231",
+        "longitude":  0.9974,
+        "latitude":  49.2773,
+        "nom":  "Elbeuf"
+    },
+    {
+        "code_commune":  "76305",
+        "longitude":  0.2223,
+        "latitude":  49.487,
+        "nom":  "Gonfreville-l\u0027Orcher"
+    },
+    {
+        "code_commune":  "76351",
+        "longitude":  0.1312,
+        "latitude":  49.4958,
+        "nom":  "Le Havre"
+    },
+    {
+        "code_commune":  "76498",
+        "longitude":  1.0572,
+        "latitude":  49.4238,
+        "nom":  "Le Petit-Quevilly"
+    },
+    {
+        "code_commune":  "76540",
+        "longitude":  1.0912,
+        "latitude":  49.4412,
+        "nom":  "Rouen"
+    },
+    {
+        "code_commune":  "76575",
+        "longitude":  1.0909,
+        "latitude":  49.3833,
+        "nom":  "Saint-Étienne-du-Rouvray"
+    },
+    {
+        "code_commune":  "76681",
+        "longitude":  1.0944,
+        "latitude":  49.4116,
+        "nom":  "Sotteville-lès-Rouen"
+    },
+    {
+        "code_commune":  "77014",
+        "longitude":  2.7337,
+        "latitude":  48.4124,
+        "nom":  "Avon"
+    },
+    {
+        "code_commune":  "77108",
+        "longitude":  2.5954,
+        "latitude":  48.8845,
+        "nom":  "Chelles"
+    },
+    {
+        "code_commune":  "77152",
+        "longitude":  2.6199,
+        "latitude":  48.5147,
+        "nom":  "Dammarie-les-Lys"
+    },
+    {
+        "code_commune":  "77183",
+        "longitude":  3.1349,
+        "latitude":  48.9562,
+        "nom":  "La Ferté-sous-Jouarre"
+    },
+    {
+        "code_commune":  "77284",
+        "longitude":  2.9035,
+        "latitude":  48.9573,
+        "nom":  "Meaux"
+    },
+    {
+        "code_commune":  "77285",
+        "longitude":  2.6301,
+        "latitude":  48.5401,
+        "nom":  "Le Mée-sur-Seine"
+    },
+    {
+        "code_commune":  "77288",
+        "longitude":  2.6552,
+        "latitude":  48.5421,
+        "nom":  "Melun"
+    },
+    {
+        "code_commune":  "77305",
+        "longitude":  2.962,
+        "latitude":  48.3887,
+        "nom":  "Montereau-Fault-Yonne"
+    },
+    {
+        "code_commune":  "77333",
+        "longitude":  2.7187,
+        "latitude":  48.2633,
+        "nom":  "Nemours"
+    },
+    {
+        "code_commune":  "77379",
+        "longitude":  3.2845,
+        "latitude":  48.5629,
+        "nom":  "Provins"
+    },
+    {
+        "code_commune":  "77445",
+        "longitude":  2.5759,
+        "latitude":  48.5846,
+        "nom":  "Savigny-le-Temple"
+    },
+    {
+        "code_commune":  "77468",
+        "longitude":  2.6476,
+        "latitude":  48.8534,
+        "nom":  "Torcy"
+    },
+    {
+        "code_commune":  "77514",
+        "longitude":  2.6178,
+        "latitude":  48.9408,
+        "nom":  "Villeparisis"
+    },
+    {
+        "code_commune":  "78123",
+        "longitude":  2.0264,
+        "latitude":  48.9469,
+        "nom":  "Carrières-sous-Poissy"
+    },
+    {
+        "code_commune":  "78138",
+        "longitude":  2.0336,
+        "latitude":  48.9773,
+        "nom":  "Chanteloup-les-Vignes"
+    },
+    {
+        "code_commune":  "78297",
+        "longitude":  2.0745,
+        "latitude":  48.7735,
+        "nom":  "Guyancourt"
+    },
+    {
+        "code_commune":  "78335",
+        "longitude":  1.7367,
+        "latitude":  48.9911,
+        "nom":  "Limay"
+    },
+    {
+        "code_commune":  "78361",
+        "longitude":  1.6918,
+        "latitude":  48.9961,
+        "nom":  "Mantes-la-Jolie"
+    },
+    {
+        "code_commune":  "78362",
+        "longitude":  1.7103,
+        "latitude":  48.9752,
+        "nom":  "Mantes-la-Ville"
+    },
+    {
+        "code_commune":  "78440",
+        "longitude":  1.911,
+        "latitude":  48.9877,
+        "nom":  "Les Mureaux"
+    },
+    {
+        "code_commune":  "78490",
+        "longitude":  1.9483,
+        "latitude":  48.8129,
+        "nom":  "Plaisir"
+    },
+    {
+        "code_commune":  "78498",
+        "longitude":  2.025,
+        "latitude":  48.9241,
+        "nom":  "Poissy"
+    },
+    {
+        "code_commune":  "78586",
+        "longitude":  2.1744,
+        "latitude":  48.9374,
+        "nom":  "Sartrouville"
+    },
+    {
+        "code_commune":  "78621",
+        "longitude":  1.9964,
+        "latitude":  48.7738,
+        "nom":  "Trappes"
+    },
+    {
+        "code_commune":  "78644",
+        "longitude":  1.9505,
+        "latitude":  48.7545,
+        "nom":  "La Verrière"
+    },
+    {
+        "code_commune":  "79191",
+        "longitude":  -0.4613,
+        "latitude":  46.3274,
+        "nom":  "Niort"
+    },
+    {
+        "code_commune":  "80021",
+        "longitude":  2.2847,
+        "latitude":  49.8987,
+        "nom":  "Amiens"
+    },
+    {
+        "code_commune":  "81004",
+        "longitude":  2.1323,
+        "latitude":  43.929,
+        "nom":  "Albi"
+    },
+    {
+        "code_commune":  "81060",
+        "longitude":  2.1672,
+        "latitude":  44.0548,
+        "nom":  "Carmaux"
+    },
+    {
+        "code_commune":  "81065",
+        "longitude":  2.2448,
+        "latitude":  43.6132,
+        "nom":  "Castres"
+    },
+    {
+        "code_commune":  "81099",
+        "longitude":  1.8898,
+        "latitude":  43.9119,
+        "nom":  "Gaillac"
+    },
+    {
+        "code_commune":  "81105",
+        "longitude":  1.9976,
+        "latitude":  43.7592,
+        "nom":  "Graulhet"
+    },
+    {
+        "code_commune":  "82112",
+        "longitude":  1.1002,
+        "latitude":  44.1219,
+        "nom":  "Moissac"
+    },
+    {
+        "code_commune":  "82121",
+        "longitude":  1.3646,
+        "latitude":  44.0217,
+        "nom":  "Montauban"
+    },
+    {
+        "code_commune":  "83023",
+        "longitude":  6.0759,
+        "latitude":  43.3878,
+        "nom":  "Brignoles"
+    },
+    {
+        "code_commune":  "83050",
+        "longitude":  6.4651,
+        "latitude":  43.5346,
+        "nom":  "Draguignan"
+    },
+    {
+        "code_commune":  "83061",
+        "longitude":  6.7848,
+        "latitude":  43.4553,
+        "nom":  "Fréjus"
+    },
+    {
+        "code_commune":  "83069",
+        "longitude":  6.2357,
+        "latitude":  43.1139,
+        "nom":  "Hyères"
+    },
+    {
+        "code_commune":  "83073",
+        "longitude":  6.3107,
+        "latitude":  43.3855,
+        "nom":  "Le Luc"
+    },
+    {
+        "code_commune":  "83086",
+        "longitude":  6.5844,
+        "latitude":  43.468,
+        "nom":  "Le Muy"
+    },
+    {
+        "code_commune":  "83126",
+        "longitude":  5.8789,
+        "latitude":  43.0837,
+        "nom":  "La Seyne-sur-Mer"
+    },
+    {
+        "code_commune":  "83137",
+        "longitude":  5.9334,
+        "latitude":  43.1364,
+        "nom":  "Toulon"
+    },
+    {
+        "code_commune":  "84003",
+        "longitude":  5.3814,
+        "latitude":  43.8815,
+        "nom":  "Apt"
+    },
+    {
+        "code_commune":  "84007",
+        "longitude":  4.8333,
+        "latitude":  43.9416,
+        "nom":  "Avignon"
+    },
+    {
+        "code_commune":  "84019",
+        "longitude":  4.751,
+        "latitude":  44.2885,
+        "nom":  "Bollène"
+    },
+    {
+        "code_commune":  "84031",
+        "longitude":  5.0584,
+        "latitude":  44.0629,
+        "nom":  "Carpentras"
+    },
+    {
+        "code_commune":  "84035",
+        "longitude":  5.0333,
+        "latitude":  43.8485,
+        "nom":  "Cavaillon"
+    },
+    {
+        "code_commune":  "84080",
+        "longitude":  4.9862,
+        "latitude":  44.033,
+        "nom":  "Monteux"
+    },
+    {
+        "code_commune":  "84087",
+        "longitude":  4.8031,
+        "latitude":  44.1264,
+        "nom":  "Orange"
+    },
+    {
+        "code_commune":  "84089",
+        "longitude":  5.5345,
+        "latitude":  43.6931,
+        "nom":  "Pertuis"
+    },
+    {
+        "code_commune":  "84092",
+        "longitude":  4.8614,
+        "latitude":  43.9707,
+        "nom":  "Le Pontet"
+    },
+    {
+        "code_commune":  "84129",
+        "longitude":  4.8555,
+        "latitude":  44.016,
+        "nom":  "Sorgues"
+    },
+    {
+        "code_commune":  "84138",
+        "longitude":  4.9973,
+        "latitude":  44.379,
+        "nom":  "Valréas"
+    },
+    {
+        "code_commune":  "85191",
+        "longitude":  -1.4162,
+        "latitude":  46.6659,
+        "nom":  "La Roche-sur-Yon"
+    },
+    {
+        "code_commune":  "86066",
+        "longitude":  0.5583,
+        "latitude":  46.8147,
+        "nom":  "Châtellerault"
+    },
+    {
+        "code_commune":  "86194",
+        "longitude":  0.3715,
+        "latitude":  46.5846,
+        "nom":  "Poitiers"
+    },
+    {
+        "code_commune":  "87085",
+        "longitude":  1.226,
+        "latitude":  45.8567,
+        "nom":  "Limoges"
+    },
+    {
+        "code_commune":  "88160",
+        "longitude":  6.4867,
+        "latitude":  48.1637,
+        "nom":  "Épinal"
+    },
+    {
+        "code_commune":  "88413",
+        "longitude":  6.9386,
+        "latitude":  48.2973,
+        "nom":  "Saint-Dié-des-Vosges"
+    },
+    {
+        "code_commune":  "90010",
+        "longitude":  6.841,
+        "latitude":  47.6458,
+        "nom":  "Belfort"
+    },
+    {
+        "code_commune":  "91027",
+        "longitude":  2.3848,
+        "latitude":  48.7093,
+        "nom":  "Athis-Mons"
+    },
+    {
+        "code_commune":  "91174",
+        "longitude":  2.4646,
+        "latitude":  48.5973,
+        "nom":  "Corbeil-Essonnes"
+    },
+    {
+        "code_commune":  "91215",
+        "longitude":  2.5152,
+        "latitude":  48.6885,
+        "nom":  "Épinay-sous-Sénart"
+    },
+    {
+        "code_commune":  "91228",
+        "longitude":  2.4313,
+        "latitude":  48.6287,
+        "nom":  "Évry-Courcouronnes"
+    },
+    {
+        "code_commune":  "91286",
+        "longitude":  2.3861,
+        "latitude":  48.6584,
+        "nom":  "Grigny"
+    },
+    {
+        "code_commune":  "91377",
+        "longitude":  2.2696,
+        "latitude":  48.7263,
+        "nom":  "Massy"
+    },
+    {
+        "code_commune":  "91549",
+        "longitude":  2.3272,
+        "latitude":  48.643,
+        "nom":  "Sainte-Geneviève-des-Bois"
+    },
+    {
+        "code_commune":  "91657",
+        "longitude":  2.4274,
+        "latitude":  48.7021,
+        "nom":  "Vigneux-sur-Seine"
+    },
+    {
+        "code_commune":  "91687",
+        "longitude":  2.3758,
+        "latitude":  48.6662,
+        "nom":  "Viry-Châtillon"
+    },
+    {
+        "code_commune":  "91692",
+        "longitude":  2.1864,
+        "latitude":  48.6817,
+        "nom":  "Les Ulis"
+    },
+    {
+        "code_commune":  "92002",
+        "longitude":  2.2976,
+        "latitude":  48.7507,
+        "nom":  "Antony"
+    },
+    {
+        "code_commune":  "92004",
+        "longitude":  2.2935,
+        "latitude":  48.9181,
+        "nom":  "Asnières-sur-Seine"
+    },
+    {
+        "code_commune":  "92007",
+        "longitude":  2.3093,
+        "latitude":  48.798,
+        "nom":  "Bagneux"
+    },
+    {
+        "code_commune":  "92025",
+        "longitude":  2.2469,
+        "latitude":  48.9218,
+        "nom":  "Colombes"
+    },
+    {
+        "code_commune":  "92036",
+        "longitude":  2.288,
+        "latitude":  48.9319,
+        "nom":  "Gennevilliers"
+    },
+    {
+        "code_commune":  "92050",
+        "longitude":  2.2018,
+        "latitude":  48.8974,
+        "nom":  "Nanterre"
+    },
+    {
+        "code_commune":  "92078",
+        "longitude":  2.3231,
+        "latitude":  48.9354,
+        "nom":  "Villeneuve-la-Garenne"
+    },
+    {
+        "code_commune":  "93001",
+        "longitude":  2.3886,
+        "latitude":  48.9128,
+        "nom":  "Aubervilliers"
+    },
+    {
+        "code_commune":  "93005",
+        "longitude":  2.4918,
+        "latitude":  48.9457,
+        "nom":  "Aulnay-sous-Bois"
+    },
+    {
+        "code_commune":  "93006",
+        "longitude":  2.4252,
+        "latitude":  48.8671,
+        "nom":  "Bagnolet"
+    },
+    {
+        "code_commune":  "93007",
+        "longitude":  2.4576,
+        "latitude":  48.9372,
+        "nom":  "Le Blanc-Mesnil"
+    },
+    {
+        "code_commune":  "93008",
+        "longitude":  2.4432,
+        "latitude":  48.9073,
+        "nom":  "Bobigny"
+    },
+    {
+        "code_commune":  "93010",
+        "longitude":  2.4846,
+        "latitude":  48.9036,
+        "nom":  "Bondy"
+    },
+    {
+        "code_commune":  "93013",
+        "longitude":  2.4287,
+        "latitude":  48.9378,
+        "nom":  "Le Bourget"
+    },
+    {
+        "code_commune":  "93014",
+        "longitude":  2.5432,
+        "latitude":  48.9081,
+        "nom":  "Clichy-sous-Bois"
+    },
+    {
+        "code_commune":  "93027",
+        "longitude":  2.3986,
+        "latitude":  48.9341,
+        "nom":  "La Courneuve"
+    },
+    {
+        "code_commune":  "93029",
+        "longitude":  2.4446,
+        "latitude":  48.925,
+        "nom":  "Drancy"
+    },
+    {
+        "code_commune":  "93031",
+        "longitude":  2.3172,
+        "latitude":  48.9544,
+        "nom":  "Épinay-sur-Seine"
+    },
+    {
+        "code_commune":  "93039",
+        "longitude":  2.3204,
+        "latitude":  48.9465,
+        "nom":  "L\u0027Île-Saint-Denis"
+    },
+    {
+        "code_commune":  "93047",
+        "longitude":  2.5678,
+        "latitude":  48.8976,
+        "nom":  "Montfermeil"
+    },
+    {
+        "code_commune":  "93048",
+        "longitude":  2.4491,
+        "latitude":  48.8637,
+        "nom":  "Montreuil"
+    },
+    {
+        "code_commune":  "93050",
+        "longitude":  2.5419,
+        "latitude":  48.8645,
+        "nom":  "Neuilly-sur-Marne"
+    },
+    {
+        "code_commune":  "93051",
+        "longitude":  2.556,
+        "latitude":  48.8327,
+        "nom":  "Noisy-le-Grand"
+    },
+    {
+        "code_commune":  "93053",
+        "longitude":  2.4578,
+        "latitude":  48.8917,
+        "nom":  "Noisy-le-Sec"
+    },
+    {
+        "code_commune":  "93055",
+        "longitude":  2.4085,
+        "latitude":  48.9006,
+        "nom":  "Pantin"
+    },
+    {
+        "code_commune":  "93061",
+        "longitude":  2.4054,
+        "latitude":  48.884,
+        "nom":  "Le Pré-Saint-Gervais"
+    },
+    {
+        "code_commune":  "93063",
+        "longitude":  2.4391,
+        "latitude":  48.8849,
+        "nom":  "Romainville"
+    },
+    {
+        "code_commune":  "93064",
+        "longitude":  2.4872,
+        "latitude":  48.8744,
+        "nom":  "Rosny-sous-Bois"
+    },
+    {
+        "code_commune":  "93066",
+        "longitude":  2.3657,
+        "latitude":  48.9378,
+        "nom":  "Saint-Denis"
+    },
+    {
+        "code_commune":  "93070",
+        "longitude":  2.3329,
+        "latitude":  48.9118,
+        "nom":  "Saint-Ouen-sur-Seine"
+    },
+    {
+        "code_commune":  "93071",
+        "longitude":  2.5311,
+        "latitude":  48.9378,
+        "nom":  "Sevran"
+    },
+    {
+        "code_commune":  "93072",
+        "longitude":  2.3868,
+        "latitude":  48.9578,
+        "nom":  "Stains"
+    },
+    {
+        "code_commune":  "93073",
+        "longitude":  2.5481,
+        "latitude":  48.9744,
+        "nom":  "Tremblay-en-France"
+    },
+    {
+        "code_commune":  "93078",
+        "longitude":  2.5323,
+        "latitude":  48.956,
+        "nom":  "Villepinte"
+    },
+    {
+        "code_commune":  "94002",
+        "longitude":  2.4214,
+        "latitude":  48.7963,
+        "nom":  "Alfortville"
+    },
+    {
+        "code_commune":  "94003",
+        "longitude":  2.3328,
+        "latitude":  48.8053,
+        "nom":  "Arcueil"
+    },
+    {
+        "code_commune":  "94004",
+        "longitude":  2.5251,
+        "latitude":  48.7453,
+        "nom":  "Boissy-Saint-Léger"
+    },
+    {
+        "code_commune":  "94017",
+        "longitude":  2.5206,
+        "latitude":  48.8173,
+        "nom":  "Champigny-sur-Marne"
+    },
+    {
+        "code_commune":  "94021",
+        "longitude":  2.3507,
+        "latitude":  48.7679,
+        "nom":  "Chevilly-Larue"
+    },
+    {
+        "code_commune":  "94028",
+        "longitude":  2.4523,
+        "latitude":  48.7845,
+        "nom":  "Créteil"
+    },
+    {
+        "code_commune":  "94037",
+        "longitude":  2.3426,
+        "latitude":  48.812,
+        "nom":  "Gentilly"
+    },
+    {
+        "code_commune":  "94038",
+        "longitude":  2.3416,
+        "latitude":  48.7777,
+        "nom":  "L\u0027Haÿ-les-Roses"
+    },
+    {
+        "code_commune":  "94041",
+        "longitude":  2.3872,
+        "latitude":  48.8125,
+        "nom":  "Ivry-sur-Seine"
+    },
+    {
+        "code_commune":  "94044",
+        "longitude":  2.4924,
+        "latitude":  48.7463,
+        "nom":  "Limeil-Brévannes"
+    },
+    {
+        "code_commune":  "94054",
+        "longitude":  2.403,
+        "latitude":  48.7402,
+        "nom":  "Orly"
+    },
+    {
+        "code_commune":  "94068",
+        "longitude":  2.4921,
+        "latitude":  48.7999,
+        "nom":  "Saint-Maur-des-Fossés"
+    },
+    {
+        "code_commune":  "94076",
+        "longitude":  2.3603,
+        "latitude":  48.7934,
+        "nom":  "Villejuif"
+    },
+    {
+        "code_commune":  "94078",
+        "longitude":  2.4493,
+        "latitude":  48.7389,
+        "nom":  "Villeneuve-Saint-Georges"
+    },
+    {
+        "code_commune":  "94081",
+        "longitude":  2.3951,
+        "latitude":  48.7893,
+        "nom":  "Vitry-sur-Seine"
+    },
+    {
+        "code_commune":  "95018",
+        "longitude":  2.2478,
+        "latitude":  48.9501,
+        "nom":  "Argenteuil"
+    },
+    {
+        "code_commune":  "95019",
+        "longitude":  2.4168,
+        "latitude":  48.9867,
+        "nom":  "Arnouville"
+    },
+    {
+        "code_commune":  "95063",
+        "longitude":  2.2147,
+        "latitude":  48.925,
+        "nom":  "Bezons"
+    },
+    {
+        "code_commune":  "95127",
+        "longitude":  2.0455,
+        "latitude":  49.0373,
+        "nom":  "Cergy"
+    },
+    {
+        "code_commune":  "95218",
+        "longitude":  2.1002,
+        "latitude":  49.0224,
+        "nom":  "Éragny"
+    },
+    {
+        "code_commune":  "95219",
+        "longitude":  2.258,
+        "latitude":  48.9891,
+        "nom":  "Ermont"
+    },
+    {
+        "code_commune":  "95252",
+        "longitude":  2.2235,
+        "latitude":  48.9879,
+        "nom":  "Franconville"
+    },
+    {
+        "code_commune":  "95268",
+        "longitude":  2.4035,
+        "latitude":  48.9696,
+        "nom":  "Garges-lès-Gonesse"
+    },
+    {
+        "code_commune":  "95277",
+        "longitude":  2.4602,
+        "latitude":  48.9856,
+        "nom":  "Gonesse"
+    },
+    {
+        "code_commune":  "95280",
+        "longitude":  2.4683,
+        "latitude":  49.0266,
+        "nom":  "Goussainville"
+    },
+    {
+        "code_commune":  "95427",
+        "longitude":  2.3471,
+        "latitude":  48.9677,
+        "nom":  "Montmagny"
+    },
+    {
+        "code_commune":  "95488",
+        "longitude":  2.1629,
+        "latitude":  49.0185,
+        "nom":  "Pierrelaye"
+    },
+    {
+        "code_commune":  "95500",
+        "longitude":  2.0996,
+        "latitude":  49.0488,
+        "nom":  "Pontoise"
+    },
+    {
+        "code_commune":  "95572",
+        "longitude":  2.1293,
+        "latitude":  49.045,
+        "nom":  "Saint-Ouen-l\u0027Aumône"
+    },
+    {
+        "code_commune":  "95585",
+        "longitude":  2.3858,
+        "latitude":  48.9925,
+        "nom":  "Sarcelles"
+    },
+    {
+        "code_commune":  "95637",
+        "longitude":  2.0254,
+        "latitude":  49.0293,
+        "nom":  "Vauréal"
+    },
+    {
+        "code_commune":  "95680",
+        "longitude":  2.4036,
+        "latitude":  49.008,
+        "nom":  "Villiers-le-Bel"
+    },
+    {
+        "code_commune":  "97101",
+        "longitude":  -61.4967,
+        "latitude":  16.2678,
+        "nom":  "Les Abymes"
+    },
+    {
+        "code_commune":  "97117",
+        "longitude":  -61.36,
+        "latitude":  16.3354,
+        "nom":  "Le Moule"
+    },
+    {
+        "code_commune":  "97120",
+        "longitude":  -61.5379,
+        "latitude":  16.2351,
+        "nom":  "Pointe-à-Pitre"
+    },
+    {
+        "code_commune":  "97209",
+        "longitude":  -61.0686,
+        "latitude":  14.6492,
+        "nom":  "Fort-de-France"
+    },
+    {
+        "code_commune":  "97302",
+        "longitude":  -52.3319,
+        "latitude":  4.9464,
+        "nom":  "Cayenne"
+    },
+    {
+        "code_commune":  "97311",
+        "longitude":  -54.0105,
+        "latitude":  4.9478,
+        "nom":  "Saint-Laurent-du-Maroni"
+    },
+    {
+        "code_commune":  "97411",
+        "longitude":  55.4444,
+        "latitude":  -20.9434,
+        "nom":  "Saint-Denis"
+    },
+    {
+        "code_commune":  "97414",
+        "longitude":  55.4224,
+        "latitude":  -21.2254,
+        "nom":  "Saint-Louis"
+    },
+    {
+        "code_commune":  "97415",
+        "longitude":  55.3402,
+        "latitude":  -21.0366,
+        "nom":  "Saint-Paul"
+    },
+    {
+        "code_commune":  "97416",
+        "longitude":  55.5044,
+        "latitude":  -21.309,
+        "nom":  "Saint-Pierre"
+    },
+    {
+        "code_commune":  "97418",
+        "longitude":  55.5234,
+        "latitude":  -20.9463,
+        "nom":  "Sainte-Marie"
+    }
+]

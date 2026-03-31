@@ -1,129 +1,414 @@
 export const DEFAULT_MAP_CENTER = [46.5, 2.5];
-const LOW_PRICE_THRESHOLD = 3.5;
-const MID_PRICE_THRESHOLD = 5.5;
+
+const LOW_SCORE_THRESHOLD = 35;
+const MID_SCORE_THRESHOLD = 60;
+const MAX_DEPARTMENTS_IN_CHART = 10;
+const MAX_SCATTER_POINTS = 40;
+const MAX_KPI1_CITY_BARS = 20;
+const MAX_KPI1_DEPARTMENT_BARS = 20;
+const MAX_KPI4_SCATTER_POINTS = 50;
+
+const KPI3_STATUS_COLORS = {
+  Actif: '#1f8c5d',
+  'Fin imminente': '#c99a00',
+  'Mandat termine': '#d96b4d',
+  Expire: '#b13a30',
+  Autre: '#6f7d73'
+};
+
+const KPI3_AGE_ORDER = ['Historique', 'Etabli', 'Recent', 'Nouveau'];
+const KPI4_PROFILE_COLORS = {
+  Surplus: '#1f8c5d',
+  Equilibre: '#c99a00',
+  Tension: '#d49a00',
+  'Forte tension': '#b13a30'
+};
 
 const average = (values) => {
   if (!values.length) return 0;
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 };
 
+export const formatInteger = (value) => new Intl.NumberFormat('fr-FR').format(Number(value) || 0);
+export const formatPercent = (value) => `${Number(value || 0).toFixed(1)}%`;
+export const formatScore = (value) => Number(value || 0).toFixed(1);
+export const formatDepartment = (value) => (value ? `Dept ${value}` : '-');
 export const formatDate = (dateValue) => new Date(dateValue).toISOString().slice(0, 10);
 export const formatCurrency = (value) => `${Number(value).toFixed(2)} EUR`;
 
-export const getRegionsFromKpis = (rows) => [...new Set(rows.map((row) => row.region))].sort();
+export const getRegionsFromKpis = (rows) => [...new Set(rows.map((row) => row.department))].sort();
 
-export const getCitiesForRegion = (rows, region) => {
-  const filteredRows = region ? rows.filter((row) => row.region === region) : rows;
+export const getCitiesForRegion = (rows, department) => {
+  const filteredRows = department ? rows.filter((row) => row.department === department) : rows;
   return [...new Set(filteredRows.map((row) => row.city))].sort();
 };
 
-export const filterBySelection = (rows, region, city) =>
+export const filterBySelection = (rows, department, city) =>
   rows.filter((row) => {
-    if (region && row.region !== region) return false;
+    if (department && row.department !== department) return false;
     if (city && row.city !== city) return false;
     return true;
   });
 
-export const getPriceBand = (price) => {
-  if (price < LOW_PRICE_THRESHOLD) return 'Economique';
-  if (price < MID_PRICE_THRESHOLD) return 'Intermediaire';
-  return 'Premium';
+export const getScoreBand = (score) => {
+  if (score < LOW_SCORE_THRESHOLD) return 'A renforcer';
+  if (score < MID_SCORE_THRESHOLD) return 'Solide';
+  return 'Prioritaire';
 };
 
-export const getPriceBandClassName = (price) => {
-  if (price < LOW_PRICE_THRESHOLD) return 'tariff-chip tariff-chip--low';
-  if (price < MID_PRICE_THRESHOLD) return 'tariff-chip tariff-chip--mid';
+export const getScoreBandClassName = (score) => {
+  if (score < LOW_SCORE_THRESHOLD) return 'tariff-chip tariff-chip--low';
+  if (score < MID_SCORE_THRESHOLD) return 'tariff-chip tariff-chip--mid';
   return 'tariff-chip tariff-chip--high';
 };
 
 export const groupKpisByRegion = (kpis) =>
   kpis.reduce((grouping, row) => {
-    grouping[row.region] = grouping[row.region] || [];
-    grouping[row.region].push(row);
+    grouping[row.department] = grouping[row.department] || [];
+    grouping[row.department].push(row);
     return grouping;
   }, {});
 
 export const buildSummary = (kpis) => {
   if (!kpis.length) {
     return {
-      avgPrice: 0,
-      avgOccupancy: 0,
+      averageScore: 0,
+      averageMotorization: 0,
+      totalLots: 0,
       topCity: '-'
     };
   }
 
-  const totals = kpis.reduce(
-    (accumulator, row) => {
-      accumulator.price += row.avg_price;
-      accumulator.occupancy += row.avg_occupancy;
-      accumulator.cityObservations[row.city] = (accumulator.cityObservations[row.city] || 0) + row.observations;
-      return accumulator;
-    },
-    { price: 0, occupancy: 0, cityObservations: {} }
-  );
-
-  const topCity = Object.entries(totals.cityObservations).sort((left, right) => right[1] - left[1])[0]?.[0];
+  const topCity = [...kpis].sort((left, right) => right.nb_lots_stat_total - left.nb_lots_stat_total)[0];
 
   return {
-    avgPrice: totals.price / kpis.length,
-    avgOccupancy: totals.occupancy / kpis.length,
-    topCity: topCity || '-'
+    averageScore: average(kpis.map((row) => row.score_potentiel)),
+    averageMotorization: average(kpis.map((row) => row.taux_motorisation_pct)),
+    totalLots: kpis.reduce((sum, row) => sum + row.nb_lots_stat_total, 0),
+    topCity: topCity?.city || '-'
   };
 };
 
-export const buildChartPriceData = (kpisByRegion) =>
-  Object.entries(kpisByRegion).map(([region, rows]) => ({
-    region,
-    avg_price: average(rows.map((row) => row.avg_price))
-  }));
+export const buildChartScoreData = (kpisByRegion) =>
+  Object.entries(kpisByRegion)
+    .map(([department, rows]) => ({
+      department: formatDepartment(department),
+      score_potentiel: average(rows.map((row) => row.score_potentiel))
+    }))
+    .sort((left, right) => right.score_potentiel - left.score_potentiel)
+    .slice(0, MAX_DEPARTMENTS_IN_CHART);
 
-export const buildTariffOverview = (kpis, kpisByRegion) => {
+const isEligibleForPotentialScore = (row) =>
+  Number(row.nb_logements || 0) > 50 && Number(row.nb_copros || 0) > 0 && Number(row.nb_lots_stat_total || 0) > 0;
+
+export const buildKpi1CityScoreData = (kpis) =>
+  kpis
+    .filter(isEligibleForPotentialScore)
+    .sort((left, right) => Number(right.score_potentiel || 0) - Number(left.score_potentiel || 0))
+    .slice(0, MAX_KPI1_CITY_BARS)
+    .map((row, index) => ({
+      city: row.city,
+      department: formatDepartment(row.department),
+      score_potentiel: Number(row.score_potentiel || 0),
+      nb_copros: Number(row.nb_copros || 0),
+      lots_stationnement: Number(row.nb_lots_stat_total || 0),
+      nb_appartements: Number(row.nb_appartements || 0),
+      nb_logements: Number(row.nb_logements || 0),
+      taux_motorisation_pct: Number(row.taux_motorisation_pct || 0),
+      rank: index + 1,
+      priority:
+        index < 4
+          ? 'Priorite 1'
+          : index < 10
+            ? 'Priorite 2'
+          : 'Priorite 3'
+    }));
+
+export const buildKpi1DepartmentScoreData = (kpis) =>
+  Object.entries(
+    kpis.filter(isEligibleForPotentialScore).reduce((grouping, row) => {
+      const department = row.department || '-';
+      grouping[department] = grouping[department] || [];
+      grouping[department].push(row);
+      return grouping;
+    }, {})
+  )
+    .map(([department, rows]) => {
+      const leader = [...rows].sort((left, right) => Number(right.score_potentiel || 0) - Number(left.score_potentiel || 0))[0];
+
+      return {
+        department: formatDepartment(department),
+        score_potentiel: average(rows.map((row) => Number(row.score_potentiel || 0))),
+        totalCommunes: rows.length,
+        leaderCity: leader?.city || '-',
+        lots_stationnement: rows.reduce((sum, row) => sum + Number(row.nb_lots_stat_total || 0), 0),
+        nb_appartements: rows.reduce((sum, row) => sum + Number(row.nb_appartements || 0), 0),
+        taux_motorisation_pct: average(rows.map((row) => Number(row.taux_motorisation_pct || 0)))
+      };
+    })
+    .sort((left, right) => right.score_potentiel - left.score_potentiel)
+    .slice(0, MAX_KPI1_DEPARTMENT_BARS)
+    .map((row, index) => ({
+      ...row,
+      rank: index + 1,
+      priority:
+        index < 4
+          ? 'Priorite 1'
+          : index < 10
+            ? 'Priorite 2'
+            : 'Priorite 3'
+    }));
+
+export const buildPotentialOverview = (kpis, kpisByRegion) => {
   if (!kpis.length) {
     return {
-      average: 0,
-      min: 0,
-      max: 0,
+      averageScore: 0,
+      minScore: 0,
+      maxScore: 0,
       spread: 0,
-      cheapestRegion: '-'
+      topDepartment: '-'
     };
   }
 
-  const prices = kpis.map((row) => row.avg_price);
-  const regionAverages = Object.entries(kpisByRegion).map(([region, rows]) => ({
-    region,
-    average: average(rows.map((row) => row.avg_price))
+  const scores = kpis.map((row) => row.score_potentiel);
+  const departmentAverages = Object.entries(kpisByRegion).map(([department, rows]) => ({
+    department,
+    averageScore: average(rows.map((row) => row.score_potentiel))
   }));
-
-  const cheapestRegion = [...regionAverages].sort((left, right) => left.average - right.average)[0];
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
+  const topDepartment = [...departmentAverages].sort((left, right) => right.averageScore - left.averageScore)[0];
+  const minScore = Math.min(...scores);
+  const maxScore = Math.max(...scores);
 
   return {
-    average: average(prices),
-    min: minPrice,
-    max: maxPrice,
-    spread: maxPrice - minPrice,
-    cheapestRegion: cheapestRegion?.region || '-'
+    averageScore: average(scores),
+    minScore,
+    maxScore,
+    spread: maxScore - minScore,
+    topDepartment: formatDepartment(topDepartment?.department)
   };
 };
 
-export const buildTariffDetails = (kpisByRegion) =>
+export const buildPotentialDetails = (kpisByRegion) =>
   Object.entries(kpisByRegion)
-    .map(([region, rows]) => {
-      const prices = rows.map((row) => row.avg_price);
-      const averagePrice = average(prices);
-      const occupancy = average(rows.map((row) => row.avg_occupancy));
-      const topCity = [...rows].sort((left, right) => right.observations - left.observations)[0];
+    .map(([department, rows]) => {
+      const leader = [...rows].sort((left, right) => right.score_potentiel - left.score_potentiel)[0];
 
       return {
-        region,
-        average: averagePrice,
-        min: Math.min(...prices),
-        max: Math.max(...prices),
-        occupancy,
-        topCity: topCity?.city || '-',
-        topObservations: topCity?.observations || 0,
-        priceBand: getPriceBand(averagePrice)
+        department: formatDepartment(department),
+        averageScore: average(rows.map((row) => row.score_potentiel)),
+        totalLots: rows.reduce((sum, row) => sum + row.nb_lots_stat_total, 0),
+        averageMotorization: average(rows.map((row) => row.taux_motorisation_pct)),
+        leadCity: leader?.city || '-',
+        totalCommunes: rows.length,
+        scoreBand: getScoreBand(average(rows.map((row) => row.score_potentiel)))
       };
     })
-    .sort((left, right) => left.average - right.average);
+    .sort((left, right) => right.averageScore - left.averageScore);
+
+export const buildMotorizationScatterData = (kpis) => {
+  if (!kpis.length) {
+    return [];
+  }
+
+  const topRows = [...kpis]
+    .sort((left, right) => right.score_potentiel - left.score_potentiel)
+    .slice(0, MAX_SCATTER_POINTS);
+
+  const maxApartments = Math.max(...topRows.map((row) => row.nb_appartements || 0), 1);
+
+  return topRows.map((row, index) => ({
+    city: row.city,
+    taux_motorisation_pct: Number(row.taux_motorisation_pct || 0),
+    lots_stationnement_copro: Number(row.nb_lots_stat_total || 0),
+    nb_appartements: Number(row.nb_appartements || 0),
+    score_potentiel: Number(row.score_potentiel || 0),
+    bubble_size: Math.max((Number(row.nb_appartements || 0) / maxApartments) * 800, 30),
+    showLabel: index < 10
+  }));
+};
+
+export const buildMotorizationScatterBounds = (scatterData) => {
+  if (!scatterData.length) {
+    return {
+      xDomain: [0, 100],
+      yDomain: [0, 1000]
+    };
+  }
+
+  const xValues = scatterData.map((row) => row.taux_motorisation_pct);
+  const yValues = scatterData.map((row) => row.lots_stationnement_copro);
+  const minX = Math.min(...xValues);
+  const maxX = Math.max(...xValues);
+  const maxY = Math.max(...yValues);
+
+  return {
+    xDomain: [Math.max(0, Math.floor(minX - 3)), Math.min(100, Math.ceil(maxX + 3))],
+    yDomain: [0, Math.ceil(maxY * 1.12 / 250) * 250]
+  };
+};
+
+export const buildInterestingHighlights = (kpis) => {
+  if (!kpis.length) {
+    return [];
+  }
+
+  const topOpportunity = [...kpis].sort((left, right) => right.score_potentiel - left.score_potentiel)[0];
+  const biggestParkingGap = [...kpis].sort((left, right) => right.parking_gap - left.parking_gap)[0];
+  const strongestPublicSupply = [...kpis].sort((left, right) => right.nb_places_publiques - left.nb_places_publiques)[0];
+  const densestApartmentMarket = [...kpis].sort((left, right) => right.nb_appartements - left.nb_appartements)[0];
+
+  return [
+    {
+      id: 'top-opportunity',
+      label: 'Commune la plus prometteuse',
+      city: topOpportunity?.city || '-',
+      value: formatScore(topOpportunity?.score_potentiel || 0),
+      meta: `Score potentiel · Dept ${topOpportunity?.department || '-'}`,
+      description: `${formatInteger(topOpportunity?.nb_lots_stat_total || 0)} lots copro et ${formatPercent(topOpportunity?.taux_motorisation_pct || 0)} de motorisation.`
+    },
+    {
+      id: 'parking-gap',
+      label: 'Demande non satisfaite la plus forte',
+      city: biggestParkingGap?.city || '-',
+      value: formatInteger(biggestParkingGap?.parking_gap || 0),
+      meta: 'Menages motorises sans parking',
+      description: `${formatPercent(biggestParkingGap?.pct_motorises_sans_parking || 0)} des menages restent sans solution de stationnement.`
+    },
+    {
+      id: 'public-supply',
+      label: 'Stock public le plus important',
+      city: strongestPublicSupply?.city || '-',
+      value: formatInteger(strongestPublicSupply?.nb_places_publiques || 0),
+      meta: 'Places publiques declarees',
+      description: `${formatInteger(strongestPublicSupply?.nb_parkings_publics || 0)} parkings publics repertories sur la commune.`
+    },
+    {
+      id: 'apartments',
+      label: 'Marche appartement le plus dense',
+      city: densestApartmentMarket?.city || '-',
+      value: formatInteger(densestApartmentMarket?.nb_appartements || 0),
+      meta: 'Appartements recenses',
+      description: `${formatInteger(densestApartmentMarket?.nb_copros || 0)} coproprietes visibles et ${formatInteger(densestApartmentMarket?.nb_logements || 0)} logements au total.`
+    }
+  ];
+};
+
+const cleanKpi3StatusLabel = (label) => {
+  const cleaned = String(label || '').replace(/[✅⚠️❌⚫🔵🟢🆕]/g, '').trim();
+
+  if (cleaned.startsWith('Actif')) return 'Actif';
+  if (cleaned.startsWith('Fin imminente')) return 'Fin imminente';
+  if (cleaned.startsWith('Mandat termine')) return 'Mandat termine';
+  if (cleaned.startsWith('Expire')) return 'Expire';
+  return cleaned || 'Autre';
+};
+
+const cleanKpi3AgeLabel = (label) => {
+  const cleaned = String(label || '').replace(/[✅⚠️❌⚫🔵🟢🆕]/g, '').trim();
+
+  if (cleaned.startsWith('Historique')) return 'Historique';
+  if (cleaned.startsWith('Etabli')) return 'Etabli';
+  if (cleaned.startsWith('Recent')) return 'Recent';
+  if (cleaned.startsWith('Nouveau')) return 'Nouveau';
+  return cleaned || 'Autre';
+};
+
+export const buildKpi3StatusData = (rows) => {
+  const grouped = rows.reduce((accumulator, row) => {
+    const label = cleanKpi3StatusLabel(row.alerte_commerciale);
+    accumulator[label] = (accumulator[label] || 0) + 1;
+    return accumulator;
+  }, {});
+
+  return Object.entries(grouped).map(([label, value]) => ({
+    label,
+    value,
+    color: KPI3_STATUS_COLORS[label] || KPI3_STATUS_COLORS.Autre
+  }));
+};
+
+export const buildKpi3AgeStackData = (rows) => {
+  const grouped = rows.reduce((accumulator, row) => {
+    const ageLabel = cleanKpi3AgeLabel(row.anciennete_label);
+    const statusLabel = cleanKpi3StatusLabel(row.alerte_commerciale);
+
+    accumulator[ageLabel] = accumulator[ageLabel] || {
+      ageLabel,
+      Actif: 0,
+      'Fin imminente': 0,
+      'Mandat termine': 0,
+      Expire: 0,
+      Autre: 0,
+      total: 0
+    };
+
+    accumulator[ageLabel][statusLabel] += 1;
+    accumulator[ageLabel].total += 1;
+    return accumulator;
+  }, {});
+
+  return Object.values(grouped).sort((left, right) => {
+    const leftIndex = KPI3_AGE_ORDER.indexOf(left.ageLabel);
+    const rightIndex = KPI3_AGE_ORDER.indexOf(right.ageLabel);
+    return (leftIndex === -1 ? 99 : leftIndex) - (rightIndex === -1 ? 99 : rightIndex);
+  });
+};
+
+const getKpi4ProfileLabel = (row) => {
+  const ratio = Number(row.ratio_stat_par_logement || 0);
+  const missingParkingPct = Number(row.pct_motorises_sans_parking || 0);
+
+  if (ratio >= 0.05 && missingParkingPct <= 8) return 'Surplus';
+  if (missingParkingPct <= 14) return 'Equilibre';
+  if (missingParkingPct <= 22) return 'Tension';
+  return 'Forte tension';
+};
+
+export const buildKpi4ProfileData = (rows) => {
+  const grouped = rows.reduce((accumulator, row) => {
+    const label = getKpi4ProfileLabel(row);
+    accumulator[label] = (accumulator[label] || 0) + 1;
+    return accumulator;
+  }, {});
+
+  return ['Surplus', 'Equilibre', 'Tension', 'Forte tension']
+    .filter((label) => grouped[label])
+    .map((label) => ({
+      label,
+      value: grouped[label],
+      color: KPI4_PROFILE_COLORS[label]
+    }));
+};
+
+export const buildKpi4OfferDemandData = (rows) =>
+  [...rows]
+    .sort((left, right) => Number(right.index_partageabilite || 0) - Number(left.index_partageabilite || 0))
+    .slice(0, MAX_KPI4_SCATTER_POINTS)
+    .map((row, index) => ({
+      city: row.ville,
+      lots_stat_copro: Number(row.lots_stat_copro || 0),
+      parking_gap: Math.max(Number(row.parking_gap || 0), 0),
+      ratio_stat_par_logement: Number(row.ratio_stat_par_logement || 0),
+      pct_motorises_sans_parking: Number(row.pct_motorises_sans_parking || 0),
+      bubble_size: Math.max(Number(row.nb_appartements || 0) / 120, 40),
+      showLabel: index < 10
+    }));
+
+export const buildKpi4OfferDemandBounds = (rows) => {
+  if (!rows.length) {
+    return {
+      xDomain: [0, 1000],
+      yDomain: [0, 1000]
+    };
+  }
+
+  const xValues = rows.map((row) => row.lots_stat_copro);
+  const yValues = rows.map((row) => row.parking_gap);
+  const maxX = Math.max(...xValues);
+  const maxY = Math.max(...yValues);
+
+  return {
+    xDomain: [0, Math.ceil(maxX * 1.12 / 250) * 250],
+    yDomain: [0, Math.ceil(maxY * 1.12 / 5000) * 5000]
+  };
+};

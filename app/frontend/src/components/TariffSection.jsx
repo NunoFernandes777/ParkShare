@@ -7,81 +7,93 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
-import { formatCurrency, getPriceBandClassName } from '../utils/dashboard';
+import { formatInteger, formatPercent, formatScore, getScoreBandClassName } from '../utils/dashboard';
 
-export function TariffSection({ chartPriceData, tariffOverview, tariffDetails }) {
+const MAX_VISIBLE_DEPARTMENT_CARDS = 4;
+
+export function TariffSection({
+  chartScoreData,
+  potentialOverview,
+  potentialDetails
+}) {
+  const visibleDepartmentDetails = potentialDetails.slice(0, MAX_VISIBLE_DEPARTMENT_CARDS);
+
   return (
     <article className="surface-card">
       <div className="section-heading">
-        <p className="eyebrow">Tarifs</p>
-        <h3>Prix par region</h3>
+        <p className="eyebrow">Prospection</p>
+        <h3>Potentiel par departement</h3>
       </div>
 
       <div className="tariff-overview">
         <div className="tariff-stat">
-          <span>Moyenne observee</span>
-          <strong>{formatCurrency(tariffOverview.average)}</strong>
+          <span>Score moyen</span>
+          <strong>{formatScore(potentialOverview.averageScore)}</strong>
         </div>
         <div className="tariff-stat">
-          <span>Fourchette</span>
+          <span>Fourchette des scores</span>
           <strong>
-            {formatCurrency(tariffOverview.min)} - {formatCurrency(tariffOverview.max)}
+            {formatScore(potentialOverview.minScore)} - {formatScore(potentialOverview.maxScore)}
           </strong>
         </div>
         <div className="tariff-stat">
-          <span>Ecart de prix</span>
-          <strong>{formatCurrency(tariffOverview.spread)}</strong>
+          <span>Ecart de score</span>
+          <strong>{formatScore(potentialOverview.spread)}</strong>
         </div>
         <div className="tariff-stat">
-          <span>Zone la plus accessible</span>
-          <strong>{tariffOverview.cheapestRegion}</strong>
+          <span>Departement leader</span>
+          <strong>{potentialOverview.topDepartment}</strong>
         </div>
       </div>
 
       <ResponsiveContainer width="100%" height={260}>
-        <BarChart data={chartPriceData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+        <BarChart data={chartScoreData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <CartesianGrid strokeDasharray="4 4" stroke="#d7d2c7" />
-          <XAxis dataKey="region" stroke="#5a5a5a" />
+          <XAxis dataKey="department" stroke="#5a5a5a" />
           <YAxis stroke="#5a5a5a" />
-          <Tooltip formatter={(value) => formatCurrency(value)} />
-          <Bar dataKey="avg_price" fill="#111111" radius={[10, 10, 0, 0]} />
+          <Tooltip formatter={(value) => formatScore(value)} />
+          <Bar dataKey="score_potentiel" fill="#111111" radius={[10, 10, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
 
       <div className="tariff-details">
-        {tariffDetails.map((detail) => (
-          <article key={detail.region} className="tariff-detail-card">
+        {visibleDepartmentDetails.map((detail) => (
+          <article key={detail.department} className="tariff-detail-card">
             <div className="tariff-detail-card__header">
               <div>
-                <h4>{detail.region}</h4>
-                <p>Ville leader: {detail.topCity}</p>
+                <h4>{detail.department}</h4>
+                <p>Commune leader: {detail.leadCity}</p>
               </div>
-              <span className={getPriceBandClassName(detail.average)}>{detail.priceBand}</span>
+              <span className={getScoreBandClassName(detail.averageScore)}>{detail.scoreBand}</span>
             </div>
 
             <div className="tariff-detail-card__grid">
               <div>
-                <span>Tarif moyen</span>
-                <strong>{formatCurrency(detail.average)}</strong>
+                <span>Score moyen</span>
+                <strong>{formatScore(detail.averageScore)}</strong>
               </div>
               <div>
-                <span>Min / Max</span>
-                <strong>
-                  {formatCurrency(detail.min)} / {formatCurrency(detail.max)}
-                </strong>
+                <span>Lots stationnement</span>
+                <strong>{formatInteger(detail.totalLots)}</strong>
               </div>
               <div>
-                <span>Occupation moyenne</span>
-                <strong>{(detail.occupancy * 100).toFixed(1)}%</strong>
+                <span>Taux motorisation moyen</span>
+                <strong>{formatPercent(detail.averageMotorization)}</strong>
               </div>
               <div>
-                <span>Observations cle</span>
-                <strong>{detail.topObservations}</strong>
+                <span>Communes suivies</span>
+                <strong>{formatInteger(detail.totalCommunes)}</strong>
               </div>
             </div>
           </article>
         ))}
       </div>
+
+      {potentialDetails.length > MAX_VISIBLE_DEPARTMENT_CARDS ? (
+        <p className="tariff-details__hint">
+          Seuls les 4 departements les plus prometteurs sont affiches ici pour garder la page lisible.
+        </p>
+      ) : null}
     </article>
   );
 }

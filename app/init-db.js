@@ -1,23 +1,235 @@
+import { readFile, readdir } from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 
-const DB_FILE = "app.db";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DB_FILE = path.resolve(__dirname, "app.db");
+const DATA_DIRECTORY = path.resolve(__dirname, "..", "data", "converted");
+const COORDINATES_CACHE_FILE = path.join(DATA_DIRECTORY, "commune_coordinates_cache.json");
 
-const regions = ["Nord", "Sud", "Est", "Ouest", "Centre"];
-const citiesByRegion = {
-  Nord: ["Lille", "Rouen"],
-  Sud: ["Marseille", "Nice"],
-  Est: ["Strasbourg", "Metz"],
-  Ouest: ["Nantes", "Bordeaux"],
-  Centre: ["Lyon", "Clermont-Ferrand"]
-};
+function parseCsvLine(line) {
+  const values = [];
+  let current = "";
+  let inQuotes = false;
 
-function rand(min, max) {
-  return min + Math.random() * (max - min);
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+
+    if (character === '"') {
+      if (inQuotes && line[index + 1] === '"') {
+        current += '"';
+        index += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (character === "," && !inQuotes) {
+      values.push(current);
+      current = "";
+      continue;
+    }
+
+    current += character;
+  }
+
+  values.push(current);
+  return values;
 }
 
-function randint(min, max) {
-  return Math.floor(rand(min, max + 1));
+function parseCsv(content) {
+  const normalized = content.replace(/^\uFEFF/, "");
+  const lines = normalized.split(/\r?\n/).filter((line) => line.trim().length > 0);
+
+  if (!lines.length) {
+    return [];
+  }
+
+  const headers = parseCsvLine(lines[0]);
+
+  return lines.slice(1).map((line) => {
+    const values = parseCsvLine(line);
+
+    return headers.reduce((row, header, index) => {
+      row[header] = values[index] ?? "";
+      return row;
+    }, {});
+  });
+}
+
+function toNumber(value) {
+  if (value === null || value === undefined || value === "") {
+    return 0;
+  }
+
+  const normalized = String(value).trim().replace(",", ".");
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function toText(value, fallback = "") {
+  const text = String(value ?? "").trim();
+  return text || fallback;
+}
+
+function normalizeCommuneName(value, fallback = "") {
+  let text = toText(value, fallback);
+
+  if (!text) {
+    return fallback;
+  }
+
+  // Repair common mojibake patterns when a UTF-8 string was decoded as Latin-1/CP1252.
+  if (/[ÃÂâ]/.test(text)) {
+    const repaired = Buffer.from(text, "latin1").toString("utf8");
+
+    if (repaired && !repaired.includes("�")) {
+      text = repaired;
+    }
+  }
+
+  return text.normalize("NFC");
+}
+
+function getDepartmentCode(codeCommune) {
+  const code = toText(codeCommune).padStart(5, "0");
+
+  if (code.startsWith("97") || code.startsWith("98")) {
+    return code.slice(0, 3);
+  }
+
+  return code.slice(0, 2);
+}
+
+function computePotentialScore(row, maxima) {
+  if (row.nb_logements <= 50 || row.nb_copros <= 0 || row.nb_lots_stat_total <= 0) {
+    return 0;
+  }
+
+  const score =
+    (row.taux_moto / Math.max(maxima.tauxMoto, 1)) * 25 +
+    (row.nb_lots_stat_total / Math.max(maxima.nbLotsStatTotal, 1)) * 30 +
+    (row.nb_copros_avec_stat / Math.max(maxima.nbCoprosAvecStat, 1)) * 20 +
+    (row.nb_appartements / Math.max(maxima.nbAppartements, 1)) * 15 +
+    (row.nb_menages_avec_voiture / Math.max(maxima.nbMenagesAvecVoiture, 1)) * 10;
+
+  return Number(score.toFixed(1));
+}
+
+function getPotentialProfile(score) {
+  if (score >= 60) return "Prioritaire";
+  if (score >= 35) return "Solide";
+  return "A renforcer";
+}
+
+async function findConsolidatedDatasetPath() {
+  const filenames = await readdir(DATA_DIRECTORY);
+  const match = filenames.find((filename) => filename.startsWith("dataset_consolid") && filename.endsWith("communes.csv"));
+
+  if (!match) {
+    throw new Error(`Dataset consolide introuvable dans ${DATA_DIRECTORY}`);
+  }
+
+  return path.join(DATA_DIRECTORY, match);
+}
+
+async function loadCommunesDataset() {
+  const datasetPath = await findConsolidatedDatasetPath();
+  const content = await readFile(datasetPath, "utf8");
+  const rows = parseCsv(content);
+  let coordinatesByCode = new Map();
+
+  try {
+    const coordinatesContent = await readFile(COORDINATES_CACHE_FILE, "latin1");
+    const coordinateRows = JSON.parse(coordinatesContent);
+    coordinatesByCode = new Map(
+      coordinateRows.map((row) => [
+        toText(row.code_commune).padStart(5, "0"),
+        {
+          latitude: toNumber(row.latitude),
+          longitude: toNumber(row.longitude),
+          nom: normalizeCommuneName(row.nom)
+        }
+      ])
+    );
+  } catch {
+    coordinatesByCode = new Map();
+  }
+
+  const normalizedRows = rows
+    .map((row) => {
+      const codeCommune = toText(row.code_commune).padStart(5, "0");
+      const coordinates = coordinatesByCode.get(codeCommune);
+      const nbLogements = toNumber(row.nb_logements);
+      const nbLotsStatTotal = toNumber(row.nb_lots_stat_total);
+      const nbMenagesAvecVoiture = toNumber(row.nb_menages_avec_voiture);
+      const nbMenagesAvecParking = toNumber(row.nb_menages_avec_parking);
+      const parkingGap = Math.max(nbMenagesAvecVoiture - nbMenagesAvecParking, 0);
+      const tauxMoto = toNumber(row.taux_moto);
+      const tauxMotorisationPct = tauxMoto <= 1 ? tauxMoto * 100 : tauxMoto;
+
+      return {
+        code_commune: codeCommune,
+        department: getDepartmentCode(codeCommune),
+        city: normalizeCommuneName(row.nom_commune || coordinates?.nom, codeCommune),
+        latitude: coordinates?.latitude || null,
+        longitude: coordinates?.longitude || null,
+        nb_copros: toNumber(row.nb_copros),
+        nb_lots_hab_total: toNumber(row.nb_lots_hab_total),
+        nb_lots_stat_total: nbLotsStatTotal,
+        nb_copros_avec_stat: toNumber(row.nb_copros_avec_stat),
+        nb_copros_sans_stat: toNumber(row.nb_copros_sans_stat),
+        nb_logements: nbLogements,
+        nb_res_principales: toNumber(row.nb_res_principales),
+        nb_appartements: toNumber(row.nb_appartements),
+        nb_places_publiques: toNumber(row.nb_places_publiques),
+        nb_parkings_publics: toNumber(row.nb_parkings_publics),
+        nb_menages_avec_parking: nbMenagesAvecParking,
+        nb_menages_avec_voiture: nbMenagesAvecVoiture,
+        taux_moto: tauxMoto,
+        taux_motorisation_pct: Number(tauxMotorisationPct.toFixed(1)),
+        ratio_stat_par_logement: nbLogements > 0 ? Number((nbLotsStatTotal / nbLogements).toFixed(3)) : 0,
+        pct_motorises_sans_parking:
+          nbLogements > 0
+            ? Number(((parkingGap / Math.max(toNumber(row.nb_menages), 1)) * 100).toFixed(1))
+            : 0,
+        parking_gap: parkingGap
+      };
+    })
+    .filter((row) => row.code_commune && row.city);
+
+  const eligibleRows = normalizedRows.filter((row) => row.nb_logements > 50 && row.nb_copros > 0 && row.nb_lots_stat_total > 0);
+
+  const maxima = eligibleRows.reduce(
+    (accumulator, row) => ({
+      tauxMoto: Math.max(accumulator.tauxMoto, row.taux_moto),
+      nbLotsStatTotal: Math.max(accumulator.nbLotsStatTotal, row.nb_lots_stat_total),
+      nbCoprosAvecStat: Math.max(accumulator.nbCoprosAvecStat, row.nb_copros_avec_stat),
+      nbAppartements: Math.max(accumulator.nbAppartements, row.nb_appartements),
+      nbMenagesAvecVoiture: Math.max(accumulator.nbMenagesAvecVoiture, row.nb_menages_avec_voiture)
+    }),
+    {
+      tauxMoto: 0,
+      nbLotsStatTotal: 0,
+      nbCoprosAvecStat: 0,
+      nbAppartements: 0,
+      nbMenagesAvecVoiture: 0
+    }
+  );
+
+  return normalizedRows.map((row) => {
+    const scorePotentiel = computePotentialScore(row, maxima);
+
+    return {
+      ...row,
+      score_potentiel: scorePotentiel,
+      profil_potentiel: getPotentialProfile(scorePotentiel)
+    };
+  });
 }
 
 async function setupDatabase() {
@@ -26,140 +238,86 @@ async function setupDatabase() {
     driver: sqlite3.Database
   });
 
-  await db.exec("PRAGMA foreign_keys=ON;");
+  const rows = await loadCommunesDataset();
 
   await db.exec(`
-    DROP TABLE IF EXISTS kpi_data;
-    DROP TABLE IF EXISTS transformed_data;
-    DROP TABLE IF EXISTS raw_data;
-  `);
+    DROP TABLE IF EXISTS communes_data;
 
-  await db.exec(`
-    CREATE TABLE raw_data (
-      source_id INTEGER PRIMARY KEY,
-      region TEXT NOT NULL,
+    CREATE TABLE communes_data (
+      code_commune TEXT PRIMARY KEY,
+      department TEXT NOT NULL,
       city TEXT NOT NULL,
-      latitude REAL NOT NULL,
-      longitude REAL NOT NULL,
-      date TEXT NOT NULL,
-      price_eur REAL NOT NULL,
-      demand_count INTEGER NOT NULL,
-      supply_count INTEGER NOT NULL,
-      source_received_at TEXT NOT NULL
-    );
-  `);
-
-  await db.exec(`
-    CREATE TABLE transformed_data AS
-      SELECT *,
-        (supply_count * 1.0 / (demand_count + 1)) AS supply_ratio,
-        (demand_count * 1.0 / (supply_count + 1)) AS occupancy_rate,
-        CASE
-          WHEN price_eur < 3.5 THEN 'Bas'
-          WHEN price_eur < 5.5 THEN 'Moyen'
-          ELSE 'Élevé'
-        END AS price_category
-      FROM raw_data
-      WHERE 0;
-  `);
-
-  await db.exec(`
-    CREATE TABLE kpi_data (
-      region TEXT,
-      city TEXT,
-      date TEXT,
-      observations INTEGER,
-      avg_price REAL,
-      avg_demand REAL,
-      avg_supply REAL,
-      avg_occupancy REAL,
-      avg_supply_ratio REAL,
-      score REAL,
-      rank_in_region INTEGER
+      latitude REAL,
+      longitude REAL,
+      nb_copros REAL NOT NULL,
+      nb_lots_hab_total REAL NOT NULL,
+      nb_lots_stat_total REAL NOT NULL,
+      nb_copros_avec_stat REAL NOT NULL,
+      nb_copros_sans_stat REAL NOT NULL,
+      nb_logements REAL NOT NULL,
+      nb_res_principales REAL NOT NULL,
+      nb_appartements REAL NOT NULL,
+      nb_places_publiques REAL NOT NULL,
+      nb_parkings_publics REAL NOT NULL,
+      nb_menages_avec_parking REAL NOT NULL,
+      nb_menages_avec_voiture REAL NOT NULL,
+      taux_moto REAL NOT NULL,
+      taux_motorisation_pct REAL NOT NULL,
+      ratio_stat_par_logement REAL NOT NULL,
+      pct_motorises_sans_parking REAL NOT NULL,
+      parking_gap REAL NOT NULL,
+      score_potentiel REAL NOT NULL,
+      profil_potentiel TEXT NOT NULL
     );
   `);
 
   const insert = await db.prepare(`
-    INSERT INTO raw_data (source_id, region, city, latitude, longitude, date, price_eur, demand_count, supply_count, source_received_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO communes_data (
+      code_commune, department, city, latitude, longitude, nb_copros, nb_lots_hab_total, nb_lots_stat_total,
+      nb_copros_avec_stat, nb_copros_sans_stat, nb_logements, nb_res_principales, nb_appartements,
+      nb_places_publiques, nb_parkings_publics, nb_menages_avec_parking, nb_menages_avec_voiture,
+      taux_moto, taux_motorisation_pct, ratio_stat_par_logement, pct_motorises_sans_parking,
+      parking_gap, score_potentiel, profil_potentiel
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
-  let id = 1;
-  const startDate = new Date("2025-01-01");
-
-  for (let i = 0; i < 800; i++) {
-    const region = regions[randint(0, regions.length - 1)];
-    const city = citiesByRegion[region][randint(0, citiesByRegion[region].length - 1)];
-
-    const lat = 45 + rand(0, 5);
-    const lon = 0 + rand(-3, 3);
-    const date = new Date(startDate);
-    date.setDate(startDate.getDate() + randint(0, 180));
-    const dateStr = date.toISOString().slice(0, 10);
-
-    const price = Number(rand(2.2, 7.8).toFixed(2));
-    const demand = Math.max(10, randint(50, 450));
-    const supply = Math.max(10, randint(60, 520));
-
-    const source_received_at = new Date().toISOString();
-
-    await insert.run(id, region, city, lat, lon, dateStr, price, demand, supply, source_received_at);
-    id += 1;
+  for (const row of rows) {
+    await insert.run(
+      row.code_commune,
+      row.department,
+      row.city,
+      row.latitude,
+      row.longitude,
+      row.nb_copros,
+      row.nb_lots_hab_total,
+      row.nb_lots_stat_total,
+      row.nb_copros_avec_stat,
+      row.nb_copros_sans_stat,
+      row.nb_logements,
+      row.nb_res_principales,
+      row.nb_appartements,
+      row.nb_places_publiques,
+      row.nb_parkings_publics,
+      row.nb_menages_avec_parking,
+      row.nb_menages_avec_voiture,
+      row.taux_moto,
+      row.taux_motorisation_pct,
+      row.ratio_stat_par_logement,
+      row.pct_motorises_sans_parking,
+      row.parking_gap,
+      row.score_potentiel,
+      row.profil_potentiel
+    );
   }
 
   await insert.finalize();
-
-  await db.exec(`
-    INSERT INTO transformed_data
-    SELECT *,
-      (supply_count * 1.0 / (demand_count + 1)) AS supply_ratio,
-      (demand_count * 1.0 / (supply_count + 1)) AS occupancy_rate,
-      CASE
-        WHEN price_eur < 3.5 THEN 'Bas'
-        WHEN price_eur < 5.5 THEN 'Moyen'
-        ELSE 'Élevé'
-      END AS price_category
-    FROM raw_data;
-  `);
-
-  await db.exec(`
-    INSERT INTO kpi_data
-      (region, city, date, observations, avg_price, avg_demand, avg_supply, avg_occupancy, avg_supply_ratio, score, rank_in_region)
-    SELECT
-      region,
-      city,
-      date,
-      COUNT(*) AS observations,
-      AVG(price_eur) AS avg_price,
-      AVG(demand_count) AS avg_demand,
-      AVG(supply_count) AS avg_supply,
-      AVG(occupancy_rate) AS avg_occupancy,
-      AVG(supply_ratio) AS avg_supply_ratio,
-      AVG(occupancy_rate) * 0.6 + AVG(1.0 - supply_ratio) * 0.3 + AVG(1.0 / (1.0 + price_eur)) * 0.1 AS score,
-      0 AS rank_in_region
-    FROM transformed_data
-    GROUP BY region, city, date;
-  `);
-
-  const rows = await db.all(`SELECT rowid, region, date, score FROM kpi_data ORDER BY region, date, score DESC`);
-  let currentRegionDate = null;
-  let rank = 0;
-
-  for (const row of rows) {
-    const key = `${row.region}_${row.date}`;
-    if (key !== currentRegionDate) {
-      currentRegionDate = key;
-      rank = 1;
-    }
-    await db.run("UPDATE kpi_data SET rank_in_region = ? WHERE rowid = ?", rank, row.rowid);
-    rank += 1;
-  }
-
   await db.close();
-  console.log(`Base de données créée : ${DB_FILE}`);
+
+  console.log(`Base de donnees creee : ${DB_FILE} (${rows.length} communes importees)`);
 }
 
-setupDatabase().catch((err) => {
-  console.error(err);
+setupDatabase().catch((error) => {
+  console.error(error);
   process.exit(1);
 });
