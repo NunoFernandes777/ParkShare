@@ -1,0 +1,68 @@
+PARKSHARE KNOWLEDGE BASE
+
+Project summary
+ParkShare is a dashboard about parking-sharing opportunity at commune level in France.
+The source used here is the consolidated communes dataset imported into SQLite.
+
+Key definitions
+score_potentiel: weighted opportunity score used to rank communes and departments.
+taux_motorisation_pct: share of households equipped with a vehicle.
+nb_lots_stat_total: number of parking lots in copropriete.
+nb_copros: number of coproprietes in the commune.
+nb_appartements: number of apartments.
+parking_gap: estimated motorized households without parking coverage.
+
+Current totals
+Visible communes: 454
+Average score potentiel: 4.5
+Average motorization: 76.1%
+Total copro parking lots: 88 045
+
+Top 20 communes by score potentiel
+1. Mulhouse | Haut-Rhin (68) | score 75.6 | motorization 67.3% | parking lots 1 319
+2. Strasbourg | Bas-Rhin (67) | score 62.8 | motorization 62.5% | parking lots 567
+3. Metz | Moselle (57) | score 62.4 | motorization 73.0% | parking lots 899
+4. Bron | Rhone (69) | score 54.6 | motorization 76.6% | parking lots 1 167
+5. Perpignan | Pyrenees-Orientales (66) | score 53.2 | motorization 73.5% | parking lots 578
+6. Vaulx-en-Velin | Rhone (69) | score 51.4 | motorization 71.1% | parking lots 1 010
+7. Lyon 8e Arrondissement | Rhone (69) | score 44.3 | motorization 65.2% | parking lots 619
+8. Clermont-Ferrand | Puy-de-Dome (63) | score 43.1 | motorization 72.7% | parking lots 349
+9. Villeurbanne | Rhone (69) | score 43.0 | motorization 65.3% | parking lots 397
+10. Nancy | Meurthe-et-Moselle (54) | score 40.9 | motorization 63.3% | parking lots 238
+11. Lyon 9e Arrondissement | Rhone (69) | score 40.2 | motorization 67.1% | parking lots 636
+12. Le Mans | Sarthe (72) | score 38.9 | motorization 76.2% | parking lots 243
+13. Vannes | Morbihan (56) | score 33.1 | motorization 79.7% | parking lots 307
+14. Haguenau | Bas-Rhin (67) | score 32.0 | motorization 85.7% | parking lots 221
+15. Saint-Louis | Haut-Rhin (68) | score 30.9 | motorization 81.3% | parking lots 158
+16. Vénissieux | Rhone (69) | score 29.6 | motorization 71.2% | parking lots 190
+17. Dunkerque | Nord (59) | score 29.3 | motorization 76.2% | parking lots 68
+18. Tarbes | Hautes-Pyrenees (65) | score 28.9 | motorization 76.3% | parking lots 153
+19. Pau | Pyrenees-Atlantiques (64) | score 28.7 | motorization 76.1% | parking lots 41
+20. Saint-Priest | Rhone (69) | score 28.2 | motorization 83.4% | parking lots 121
+
+Top departments by average score potentiel
+1. Bas-Rhin (67) | average score 33.5 | communes 5 | leader city Strasbourg
+2. Puy-de-Dome (63) | average score 32.6 | communes 2 | leader city Clermont-Ferrand
+3. Haut-Rhin (68) | average score 31.8 | communes 5 | leader city Mulhouse
+4. Hautes-Pyrenees (65) | average score 28.9 | communes 1 | leader city Tarbes
+5. Rhone (69) | average score 27.4 | communes 20 | leader city Bron
+6. Pyrenees-Atlantiques (64) | average score 27.1 | communes 2 | leader city Pau
+7. Sarthe (72) | average score 26.8 | communes 3 | leader city Le Mans
+8. Pyrenees-Orientales (66) | average score 26.6 | communes 2 | leader city Perpignan
+9. Morbihan (56) | average score 26.5 | communes 4 | leader city Vannes
+10. Martinique (972) | average score 25.5 | communes 1 | leader city Fort-de-France
+11. Saone-et-Loire (71) | average score 25.4 | communes 2 | leader city Mâcon
+12. Nievre (58) | average score 22.9 | communes 1 | leader city Nevers
+13. Moselle (57) | average score 22.4 | communes 9 | leader city Metz
+14. Meurthe-et-Moselle (54) | average score 15.9 | communes 11 | leader city Nancy
+15. La Reunion (974) | average score 14.0 | communes 5 | leader city Saint-Paul
+16. Guyane (973) | average score 11.6 | communes 2 | leader city Cayenne
+17. Pas-de-Calais (62) | average score 7.8 | communes 13 | leader city Arras
+18. Nord (59) | average score 6.1 | communes 17 | leader city Dunkerque
+19. Alpes-de-Haute-Provence (04) | average score 0.0 | communes 1 | leader city Digne-les-Bains
+20. Alpes-Maritimes (06) | average score 0.0 | communes 6 | leader city Cannes
+
+Usage guidance for chatbot
+When answering, prefer factual summaries from these indicators.
+Do not invent data beyond the exported communes and departments.
+If a commune is absent from this knowledge file, say that the commune is not present in the exported dataset.

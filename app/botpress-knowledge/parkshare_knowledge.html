@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ParkShare Knowledge Base</title>
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.6; margin: 32px; color: #111; }
+      h1, h2 { margin-bottom: 8px; }
+      section { margin-bottom: 24px; }
+      ul { padding-left: 20px; }
+      li { margin-bottom: 10px; }
+    </style>
+  </head>
+  <body>
+    <h1>ParkShare Knowledge Base</h1>
+
+    <section>
+      <h2>Project summary</h2>
+      <p>ParkShare is a dashboard about parking-sharing opportunity at commune level in France.</p>
+      <p>The source used here is the consolidated communes dataset imported into SQLite.</p>
+    </section>
+
+    <section>
+      <h2>Key definitions</h2>
+      <ul>
+        <li><strong>score_potentiel</strong>: weighted opportunity score used to rank communes and departments.</li>
+        <li><strong>taux_motorisation_pct</strong>: share of households equipped with a vehicle.</li>
+        <li><strong>nb_lots_stat_total</strong>: number of parking lots in copropriete.</li>
+        <li><strong>nb_copros</strong>: number of coproprietes in the commune.</li>
+        <li><strong>nb_appartements</strong>: number of apartments.</li>
+        <li><strong>parking_gap</strong>: estimated motorized households without parking coverage.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Current totals</h2>
+      <ul>
+        <li>Visible communes: 454</li>
+        <li>Average score potentiel: 4.5</li>
+        <li>Average motorization: 76.1%</li>
+        <li>Total copro parking lots: 88 045</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Top 20 communes by score potentiel</h2>
+      <ul>
+        <li>
+          <strong>1. Mulhouse</strong><br />
+          Haut-Rhin (68) |
+          score 75.6 |
+          motorization 67.3% |
+          parking lots 1 319
+        </li>
+
+        <li>
+          <strong>2. Strasbourg</strong><br />
+          Bas-Rhin (67) |
+          score 62.8 |
+          motorization 62.5% |
+          parking lots 567
+        </li>
+
+        <li>
+          <strong>3. Metz</strong><br />
+          Moselle (57) |
+          score 62.4 |
+          motorization 73.0% |
+          parking lots 899
+        </li>
+
+        <li>
+          <strong>4. Bron</strong><br />
+          Rhone (69) |
+          score 54.6 |
+          motorization 76.6% |
+          parking lots 1 167
+        </li>
+
+        <li>
+          <strong>5. Perpignan</strong><br />
+          Pyrenees-Orientales (66) |
+          score 53.2 |
+          motorization 73.5% |
+          parking lots 578
+        </li>
+
+        <li>
+          <strong>6. Vaulx-en-Velin</strong><br />
+          Rhone (69) |
+          score 51.4 |
+          motorization 71.1% |
+          parking lots 1 010
+        </li>
+
+        <li>
+          <strong>7. Lyon 8e Arrondissement</strong><br />
+          Rhone (69) |
+          score 44.3 |
+          motorization 65.2% |
+          parking lots 619
+        </li>
+
+        <li>
+          <strong>8. Clermont-Ferrand</strong><br />
+          Puy-de-Dome (63) |
+          score 43.1 |
+          motorization 72.7% |
+          parking lots 349
+        </li>
+
+        <li>
+          <strong>9. Villeurbanne</strong><br />
+          Rhone (69) |
+          score 43.0 |
+          motorization 65.3% |
+          parking lots 397
+        </li>
+
+        <li>
+          <strong>10. Nancy</strong><br />
+          Meurthe-et-Moselle (54) |
+          score 40.9 |
+          motorization 63.3% |
+          parking lots 238
+        </li>
+
+        <li>
+          <strong>11. Lyon 9e Arrondissement</strong><br />
+          Rhone (69) |
+          score 40.2 |
+          motorization 67.1% |
+          parking lots 636
+        </li>
+
+        <li>
+          <strong>12. Le Mans</strong><br />
+          Sarthe (72) |
+          score 38.9 |
+          motorization 76.2% |
+          parking lots 243
+        </li>
+
+        <li>
+          <strong>13. Vannes</strong><br />
+          Morbihan (56) |
+          score 33.1 |
+          motorization 79.7% |
+          parking lots 307
+        </li>
+
+        <li>
+          <strong>14. Haguenau</strong><br />
+          Bas-Rhin (67) |
+          score 32.0 |
+          motorization 85.7% |
+          parking lots 221
+        </li>
+
+        <li>
+          <strong>15. Saint-Louis</strong><br />
+          Haut-Rhin (68) |
+          score 30.9 |
+          motorization 81.3% |
+          parking lots 158
+        </li>
+
+        <li>
+          <strong>16. Vénissieux</strong><br />
+          Rhone (69) |
+          score 29.6 |
+          motorization 71.2% |
+          parking lots 190
+        </li>
+
+        <li>
+          <strong>17. Dunkerque</strong><br />
+          Nord (59) |
+          score 29.3 |
+          motorization 76.2% |
+          parking lots 68
+        </li>
+
+        <li>
+          <strong>18. Tarbes</strong><br />
+          Hautes-Pyrenees (65) |
+          score 28.9 |
+          motorization 76.3% |
+          parking lots 153
+        </li>
+
+        <li>
+          <strong>19. Pau</strong><br />
+          Pyrenees-Atlantiques (64) |
+          score 28.7 |
+          motorization 76.1% |
+          parking lots 41
+        </li>
+
+        <li>
+          <strong>20. Saint-Priest</strong><br />
+          Rhone (69) |
+          score 28.2 |
+          motorization 83.4% |
+          parking lots 121
+        </li></ul>
+    </section>
+
+    <section>
+      <h2>Top departments by average score potentiel</h2>
+      <ul>
+        <li>
+          <strong>1. Bas-Rhin (67)</strong><br />
+          average score 33.5 |
+          communes 5 |
+          leader city Strasbourg
+        </li>
+
+        <li>
+          <strong>2. Puy-de-Dome (63)</strong><br />
+          average score 32.6 |
+          communes 2 |
+          leader city Clermont-Ferrand
+        </li>
+
+        <li>
+          <strong>3. Haut-Rhin (68)</strong><br />
+          average score 31.8 |
+          communes 5 |
+          leader city Mulhouse
+        </li>
+
+        <li>
+          <strong>4. Hautes-Pyrenees (65)</strong><br />
+          average score 28.9 |
+          communes 1 |
+          leader city Tarbes
+        </li>
+
+        <li>
+          <strong>5. Rhone (69)</strong><br />
+          average score 27.4 |
+          communes 20 |
+          leader city Bron
+        </li>
+
+        <li>
+          <strong>6. Pyrenees-Atlantiques (64)</strong><br />
+          average score 27.1 |
+          communes 2 |
+          leader city Pau
+        </li>
+
+        <li>
+          <strong>7. Sarthe (72)</strong><br />
+          average score 26.8 |
+          communes 3 |
+          leader city Le Mans
+        </li>
+
+        <li>
+          <strong>8. Pyrenees-Orientales (66)</strong><br />
+          average score 26.6 |
+          communes 2 |
+          leader city Perpignan
+        </li>
+
+        <li>
+          <strong>9. Morbihan (56)</strong><br />
+          average score 26.5 |
+          communes 4 |
+          leader city Vannes
+        </li>
+
+        <li>
+          <strong>10. Martinique (972)</strong><br />
+          average score 25.5 |
+          communes 1 |
+          leader city Fort-de-France
+        </li>
+
+        <li>
+          <strong>11. Saone-et-Loire (71)</strong><br />
+          average score 25.4 |
+          communes 2 |
+          leader city Mâcon
+        </li>
+
+        <li>
+          <strong>12. Nievre (58)</strong><br />
+          average score 22.9 |
+          communes 1 |
+          leader city Nevers
+        </li>
+
+        <li>
+          <strong>13. Moselle (57)</strong><br />
+          average score 22.4 |
+          communes 9 |
+          leader city Metz
+        </li>
+
+        <li>
+          <strong>14. Meurthe-et-Moselle (54)</strong><br />
+          average score 15.9 |
+          communes 11 |
+          leader city Nancy
+        </li>
+
+        <li>
+          <strong>15. La Reunion (974)</strong><br />
+          average score 14.0 |
+          communes 5 |
+          leader city Saint-Paul
+        </li>
+
+        <li>
+          <strong>16. Guyane (973)</strong><br />
+          average score 11.6 |
+          communes 2 |
+          leader city Cayenne
+        </li>
+
+        <li>
+          <strong>17. Pas-de-Calais (62)</strong><br />
+          average score 7.8 |
+          communes 13 |
+          leader city Arras
+        </li>
+
+        <li>
+          <strong>18. Nord (59)</strong><br />
+          average score 6.1 |
+          communes 17 |
+          leader city Dunkerque
+        </li>
+
+        <li>
+          <strong>19. Alpes-de-Haute-Provence (04)</strong><br />
+          average score 0.0 |
+          communes 1 |
+          leader city Digne-les-Bains
+        </li>
+
+        <li>
+          <strong>20. Alpes-Maritimes (06)</strong><br />
+          average score 0.0 |
+          communes 6 |
+          leader city Cannes
+        </li></ul>
+    </section>
+
+    <section>
+      <h2>Usage guidance for chatbot</h2>
+      <ul>
+        <li>Prefer factual summaries from these indicators.</li>
+        <li>Do not invent data beyond the exported communes and departments.</li>
+        <li>If a commune is absent from this knowledge file, say that the commune is not present in the exported dataset.</li>
+      </ul>
+    </section>
+  </body>
+</html>

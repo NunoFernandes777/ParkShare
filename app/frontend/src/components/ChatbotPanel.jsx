@@ -5,6 +5,7 @@ const BOTPRESS_OPEN_DELAY_MS = 150;
 const BOTPRESS_BOOT_DELAY_MS = 500;
 const MISSING_CONFIG_MESSAGE = 'Ajoutez VITE_BOTPRESS_BOT_ID et VITE_BOTPRESS_CLIENT_ID dans app/frontend/.env.';
 const BOTPRESS_INIT_ERROR_MESSAGE = 'Botpress n a pas pu etre initialise.';
+const BOTPRESS_RUNTIME_ERROR_MESSAGE = 'Le widget chat a rencontre une erreur. Rechargez la page ou reouvrez le chat.';
 const BOTPRESS_STORAGE_LOCATION = 'sessionStorage';
 
 function injectBotpressScript() {
@@ -33,7 +34,11 @@ function injectBotpressScript() {
 
 function openBotpressWidget(delayMs) {
   window.setTimeout(() => {
-    window.botpress?.open();
+    try {
+      window.botpress?.open?.();
+    } catch (error) {
+      console.error('Erreur ouverture Botpress:', error);
+    }
   }, delayMs);
 }
 
@@ -77,6 +82,7 @@ export function ChatbotPanel({
   const [error, setError] = useState('');
   const lastContextRef = useRef('');
   const shouldOpenRef = useRef(false);
+  const hasInitializedRef = useRef(false);
 
   const botId = import.meta.env.VITE_BOTPRESS_BOT_ID;
   const clientId = import.meta.env.VITE_BOTPRESS_CLIENT_ID;
@@ -98,6 +104,10 @@ export function ChatbotPanel({
         return;
       }
 
+      if (hasInitializedRef.current) {
+        return;
+      }
+
       try {
         await injectBotpressScript();
 
@@ -115,6 +125,7 @@ export function ChatbotPanel({
             storageLocation: BOTPRESS_STORAGE_LOCATION
           }
         });
+        hasInitializedRef.current = true;
 
         window.botpress.on('webchat:initialized', () => {
           if (!isMounted) return;
@@ -144,10 +155,16 @@ export function ChatbotPanel({
     shouldOpenRef.current = isOpen;
     if (!isReady) return;
 
-    if (isOpen) {
-      openBotpressWidget(BOTPRESS_OPEN_DELAY_MS);
-    } else {
-      window.botpress.close();
+    try {
+      if (isOpen) {
+        openBotpressWidget(BOTPRESS_OPEN_DELAY_MS);
+      } else {
+        window.botpress.close?.();
+      }
+    } catch (runtimeError) {
+      console.error('Erreur widget Botpress:', runtimeError);
+      setError(BOTPRESS_RUNTIME_ERROR_MESSAGE);
+      setIsOpen(false);
     }
   }, [isOpen, isReady]);
 
@@ -156,10 +173,15 @@ export function ChatbotPanel({
     const serializedPayload = JSON.stringify(contextPayload);
     if (lastContextRef.current === serializedPayload) return;
 
-    // Le contexte est envoye en evenement invisible plutot
-    // qu en message affiche dans la conversation.
-    window.botpress.sendEvent(contextPayload);
-    lastContextRef.current = serializedPayload;
+    try {
+      // Le contexte est envoye en evenement invisible plutot
+      // qu en message affiche dans la conversation.
+      window.botpress.sendEvent?.(contextPayload);
+      lastContextRef.current = serializedPayload;
+    } catch (runtimeError) {
+      console.error('Erreur contexte Botpress:', runtimeError);
+      setError(BOTPRESS_RUNTIME_ERROR_MESSAGE);
+    }
   }, [contextPayload, isOpen, isReady]);
 
   return (

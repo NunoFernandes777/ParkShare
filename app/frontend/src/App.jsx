@@ -77,22 +77,26 @@ async function loadApiData(region, city) {
   if (region) cityParams.append('department', region);
   const cityOptionsUrl = `${API_ENDPOINTS.kpis}${cityParams.toString() ? `?${cityParams.toString()}` : ''}`;
 
-  const [regions, cityRows, kpis, points, kpi3Rows, kpi4Rows] = await Promise.all([
+  const [regions, cityRows, kpis, allKpis, points, kpi3Rows, kpi4Rows, allKpi4Rows] = await Promise.all([
     fetchJson(urls.regions),
     fetchJson(cityOptionsUrl),
     fetchJson(urls.kpis),
+    fetchJson(API_ENDPOINTS.kpis),
     fetchJson(urls.points),
     fetchJson(urls.kpi3),
-    fetchJson(urls.kpi4)
+    fetchJson(urls.kpi4),
+    fetchJson(API_ENDPOINTS.kpi4)
   ]);
 
   return {
     regions,
     cities: getCitiesForRegion(cityRows, region),
     kpis,
+    allKpis,
     points,
     kpi3Rows,
-    kpi4Rows
+    kpi4Rows,
+    allKpi4Rows
   };
 }
 
@@ -102,9 +106,11 @@ export default function App() {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [kpis, setKpis] = useState([]);
+  const [allKpis, setAllKpis] = useState([]);
   const [points, setPoints] = useState([]);
   const [kpi3Rows, setKpi3Rows] = useState([]);
   const [kpi4Rows, setKpi4Rows] = useState([]);
+  const [allKpi4Rows, setAllKpi4Rows] = useState([]);
   const [isOfflineMode, setIsOfflineMode] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState('');
 
@@ -119,9 +125,11 @@ export default function App() {
         setRegions(data.regions);
         setCities(data.cities);
         setKpis(data.kpis);
+        setAllKpis(data.allKpis);
         setPoints(data.points);
         setKpi3Rows(data.kpi3Rows);
         setKpi4Rows(data.kpi4Rows);
+        setAllKpi4Rows(data.allKpi4Rows);
         setIsOfflineMode(false);
         setApiErrorMessage('');
       } catch (error) {
@@ -130,9 +138,11 @@ export default function App() {
         setRegions([]);
         setCities([]);
         setKpis([]);
+        setAllKpis([]);
         setPoints([]);
         setKpi3Rows([]);
         setKpi4Rows([]);
+        setAllKpi4Rows([]);
         setIsOfflineMode(true);
         setApiErrorMessage(error.message || 'Le dashboard ne parvient pas a recuperer les donnees.');
       }
@@ -145,16 +155,19 @@ export default function App() {
     };
   }, [selectedRegion, selectedCity]);
 
-  const kpisByRegion = useMemo(() => groupKpisByRegion(kpis), [kpis]);
+  const kpisByRegion = useMemo(() => groupKpisByRegion(allKpis), [allKpis]);
   const summary = useMemo(() => buildSummary(kpis), [kpis]);
   const chartScoreData = useMemo(() => buildChartScoreData(kpisByRegion), [kpisByRegion]);
   const interestingHighlights = useMemo(() => buildInterestingHighlights(kpis), [kpis]);
-  const kpi1CityScoreData = useMemo(() => buildKpi1CityScoreData(kpis), [kpis]);
-  const kpi1DepartmentScoreData = useMemo(() => buildKpi1DepartmentScoreData(kpis), [kpis]);
+  const kpi1CityScoreData = useMemo(() => buildKpi1CityScoreData(allKpis), [allKpis]);
+  const kpi1DepartmentScoreData = useMemo(
+    () => buildKpi1DepartmentScoreData(allKpis),
+    [allKpis]
+  );
   const kpi3StatusData = useMemo(() => buildKpi3StatusData(kpi3Rows), [kpi3Rows]);
   const kpi3AgeStackData = useMemo(() => buildKpi3AgeStackData(kpi3Rows), [kpi3Rows]);
-  const kpi4ProfileData = useMemo(() => buildKpi4ProfileData(kpi4Rows), [kpi4Rows]);
-  const kpi4OfferDemandData = useMemo(() => buildKpi4OfferDemandData(kpi4Rows), [kpi4Rows]);
+  const kpi4ProfileData = useMemo(() => buildKpi4ProfileData(allKpi4Rows), [allKpi4Rows]);
+  const kpi4OfferDemandData = useMemo(() => buildKpi4OfferDemandData(allKpi4Rows), [allKpi4Rows]);
   const kpi4OfferDemandBounds = useMemo(
     () => buildKpi4OfferDemandBounds(kpi4OfferDemandData),
     [kpi4OfferDemandData]
@@ -198,7 +211,7 @@ export default function App() {
           </section>
         ) : null}
 
-        <InsightsSection kpisCount={kpis.length} isOfflineMode={isOfflineMode} summary={summary} />
+        <InsightsSection kpisCount={allKpis.length} isOfflineMode={isOfflineMode} summary={summary} />
 
         <HighlightsSection highlights={interestingHighlights} />
 

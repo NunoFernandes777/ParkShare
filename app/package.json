@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "init-db": "node init-db.js",
+    "export:botpress": "node export-botpress-knowledge.js",
     "start:api": "node backend/server.js",
     "start:frontend": "cd frontend && npm run dev",
     "start": "npm run init-db && npm run start:api"

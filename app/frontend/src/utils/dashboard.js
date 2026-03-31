@@ -213,11 +213,18 @@ export const buildChartScoreData = (kpisByRegion) =>
 const isEligibleForPotentialScore = (row) =>
   Number(row.nb_logements || 0) > 50 && Number(row.nb_copros || 0) > 0 && Number(row.nb_lots_stat_total || 0) > 0;
 
-export const buildKpi1CityScoreData = (kpis) =>
-  kpis
-    .filter(isEligibleForPotentialScore)
+const getKpi1BaseRows = (kpis, selectedCity) => {
+  if (selectedCity) {
+    return [...kpis];
+  }
+
+  return kpis.filter(isEligibleForPotentialScore);
+};
+
+export const buildKpi1CityScoreData = (kpis, selectedCity = '') =>
+  getKpi1BaseRows(kpis, selectedCity)
     .sort((left, right) => Number(right.score_potentiel || 0) - Number(left.score_potentiel || 0))
-    .slice(0, MAX_KPI1_CITY_BARS)
+    .slice(0, selectedCity ? kpis.length : MAX_KPI1_CITY_BARS)
     .map((row, index) => ({
       city: row.city,
       department: formatDepartment(row.department),
@@ -233,12 +240,12 @@ export const buildKpi1CityScoreData = (kpis) =>
           ? 'Priorite 1'
           : index < 10
             ? 'Priorite 2'
-          : 'Priorite 3'
+            : 'Priorite 3'
     }));
 
-export const buildKpi1DepartmentScoreData = (kpis) =>
+export const buildKpi1DepartmentScoreData = (kpis, selectedCity = '') =>
   Object.entries(
-    kpis.filter(isEligibleForPotentialScore).reduce((grouping, row) => {
+    getKpi1BaseRows(kpis, selectedCity).reduce((grouping, row) => {
       const department = row.department || '-';
       grouping[department] = grouping[department] || [];
       grouping[department].push(row);
@@ -259,7 +266,7 @@ export const buildKpi1DepartmentScoreData = (kpis) =>
       };
     })
     .sort((left, right) => right.score_potentiel - left.score_potentiel)
-    .slice(0, MAX_KPI1_DEPARTMENT_BARS)
+    .slice(0, selectedCity ? kpis.length : MAX_KPI1_DEPARTMENT_BARS)
     .map((row, index) => ({
       ...row,
       rank: index + 1,
@@ -324,7 +331,7 @@ export const buildMotorizationScatterData = (kpis) => {
 
   const topRows = [...kpis]
     .sort((left, right) => right.score_potentiel - left.score_potentiel)
-    .slice(0, MAX_SCATTER_POINTS);
+    .slice(0, kpis.length === 1 ? 1 : MAX_SCATTER_POINTS);
 
   const maxApartments = Math.max(...topRows.map((row) => row.nb_appartements || 0), 1);
 
