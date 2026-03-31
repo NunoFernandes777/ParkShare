@@ -162,7 +162,6 @@ export function AnalyticsSection({
     <section className="analytics-stack">
       <article className="surface-card">
         <div className="section-heading">
-          <p className="eyebrow">KPI 1</p>
           <h3>Score potentiel</h3>
         </div>
 
@@ -227,7 +226,6 @@ export function AnalyticsSection({
 
       <article className="surface-card">
         <div className="section-heading">
-          <p className="eyebrow">KPI 2</p>
           <h3>Motorisation vs stock de places</h3>
         </div>
 
@@ -294,7 +292,6 @@ export function AnalyticsSection({
 
       <article className="surface-card">
         <div className="section-heading">
-          <p className="eyebrow">KPI 3</p>
           <h3>Analyse des mandats de copropriete</h3>
         </div>
 
@@ -349,7 +346,6 @@ export function AnalyticsSection({
 
       <article className="surface-card">
         <div className="section-heading">
-          <p className="eyebrow">KPI 4</p>
           <h3>Ratio et tension de stationnement</h3>
         </div>
 
