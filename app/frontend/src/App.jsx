@@ -260,6 +260,7 @@ export default function App() {
         summary={summary}
         potentialOverview={potentialOverview}
         kpis={kpis}
+        allKpis={allKpis}
       />
     </div>
   );

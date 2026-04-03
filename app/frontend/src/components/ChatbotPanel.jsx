@@ -42,13 +42,17 @@ function openBotpressWidget(delayMs) {
   }, delayMs);
 }
 
-function buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview, kpis }) {
+function buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview, filteredKpis, allKpis }) {
   return {
     type: 'dashboard_context',
     payload: {
       filters: {
         department: selectedRegion || 'Tous',
         city: selectedCity || 'Toutes'
+      },
+      counts: {
+        totalCommunes: allKpis.length,
+        filteredCommunes: filteredKpis.length
       },
       summary: {
         averageScore: Number(summary.averageScore.toFixed(1)),
@@ -57,7 +61,7 @@ function buildContextPayload({ selectedRegion, selectedCity, summary, tariffOver
         topCity: summary.topCity,
         topDepartment: tariffOverview.topDepartment
       },
-      visibleCities: kpis.slice(0, 5).map((row) => ({
+      visibleCities: filteredKpis.slice(0, 5).map((row) => ({
         codeCommune: row.code_commune,
         department: row.department,
         city: row.city,
@@ -75,7 +79,8 @@ export function ChatbotPanel({
   selectedCity,
   summary,
   potentialOverview,
-  kpis
+  kpis,
+  allKpis
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -88,8 +93,16 @@ export function ChatbotPanel({
   const clientId = import.meta.env.VITE_BOTPRESS_CLIENT_ID;
 
   const contextPayload = useMemo(
-    () => buildContextPayload({ selectedRegion, selectedCity, summary, tariffOverview: potentialOverview, kpis }),
-    [selectedRegion, selectedCity, summary, potentialOverview, kpis]
+    () =>
+      buildContextPayload({
+        selectedRegion,
+        selectedCity,
+        summary,
+        tariffOverview: potentialOverview,
+        filteredKpis: kpis,
+        allKpis
+      }),
+    [selectedRegion, selectedCity, summary, potentialOverview, kpis, allKpis]
   );
   const isConfigured = Boolean(botId && clientId);
 
